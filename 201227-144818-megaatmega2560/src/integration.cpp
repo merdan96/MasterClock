@@ -1,0 +1,38 @@
+#include <Arduino.h>
+#include "Common.h"
+#include "Display.h"
+#include "Capture.h"
+#include "Clock.h"
+#include "Master.h"
+#include "Network.h"
+
+unsigned long Sys_Tick = 0;
+void setup()
+{
+#ifdef _Debug_Serial
+  Serial.begin(9600);
+  while (!Serial)
+    ;
+#endif
+  // Network
+  Network_Setup();
+  // Print Slave Status
+  Display_ChangePage(DEFAULT_PAGE);
+  Capture_init();
+  Master_init();
+  Display_Init();
+}
+
+void loop()
+{
+  if ((Sys_Tick % 5) == 0)
+  {
+    Master_MainFunctionUpdateClock();
+    Network_RecieveMainFunction();
+  }
+
+  Capture_MainFunction();
+  
+  delay(100);
+  Sys_Tick++;
+}
