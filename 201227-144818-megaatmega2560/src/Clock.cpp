@@ -2,17 +2,15 @@
 #include <Wire.h>
 #include <DS1307RTC.h>
 
-/* 
-    * Struct to save time parametes 
-    * uint8_t Second; 
-    * uint8_t Minute; 
-    * uint8_t Hour; 
-    * uint8_t Wday;   // day of week, sunday is day 1
-    * uint8_t Day;
-    * uint8_t Month; 
-    * uint8_t Year;   
-*/
+/*****************************************************************
+                    *  GLOBAL VARIABLES  * 
+ *****************************************************************/
+// To hold The Time paramters,
 tmElements_t Master_Time;
+
+/*****************************************************************
+                    *  GLOABAL FUNCTIONS  * 
+ *****************************************************************/
 
 // Function for Set Clock
 void Clock_Init()
@@ -20,28 +18,30 @@ void Clock_Init()
     // RTC, NTP, .....
 }
 
+// Re-sync Clock From USER to Clock Source.
 void Clock_ReSync()
 {
-#ifdef RTC_WRITE_ENABLE
+#if 0
     // Update RTC
     if (RTC.write(Master_Time))
     {
     }
 #endif
 }
+
 // Function for Update Time every Second
 void Clock_UpdateRealTime()
 {
 #if (CLOCK_SOURC == _RTC_)
     if (RTC.read(Master_Time))
     {
-#ifdef _Debug_Serial
-//        Serial.println("Time updated Successfuly");
+#if (_DEBUG_SERIAL == E_ON)
+        //Serial.println("Time updated Successfuly");
 #endif
     }
     else
     {
-#ifdef _Debug_Serial
+#if (_DEBUG_SERIAL == E_ON)
         if (RTC.chipPresent())
         {
             Serial.println("The DS1307 is stopped.  Please run the SetTime");

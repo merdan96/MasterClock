@@ -1,20 +1,30 @@
 
 #ifndef CAPTURE_h
 #define CAPTURE_h
-
+#include "Common.h"
 #include <Keypad.h>
 #include <IRremote.h>
-#include "Common.h"
-
-//Configurations 
-#define _KEYPAD_ENABLE
-#define _IR_ENABLE
+#include "Master_CBK.h"
 
 
-// Get Key and Call back "Master/Nofitication" 
+/*****************************************************************
+                    *  CONFIGURATIONS  * 
+ *****************************************************************/
+
+// Configure Keypad To be ON/OFF.
+#define _KEY_PAD_        E_ON
+
+// Configure IR_Remote To be ON/OFF.
+#define _IR_REMOTE_      E_ON
+
+
+/*****************************************************************
+                    *  Gloabal Functions  * 
+ *****************************************************************/
+
+// Get Key and Call back Application.
 void Capture_MainFunction();
-
-// Init 
+// Init the Capture 
 void Capture_init();
 
 

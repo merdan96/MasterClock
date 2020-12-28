@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include "Common.h"
 #include "Display.h"
 #include "Capture.h"
@@ -9,10 +8,9 @@
 unsigned long Sys_Tick = 0;
 void setup()
 {
-#ifdef _Debug_Serial
+#if (_DEBUG_SERIAL == E_ON)
   Serial.begin(9600);
-  while (!Serial)
-    ;
+  while (!Serial);
 #endif
   // Network
   Network_Setup();
@@ -30,9 +28,7 @@ void loop()
     Master_MainFunctionUpdateClock();
     Network_RecieveMainFunction();
   }
-
   Capture_MainFunction();
-  
   delay(100);
   Sys_Tick++;
 }

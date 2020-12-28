@@ -1,9 +1,10 @@
 #include "Capture.h"
-// Temporary include
-#include "Master_CBK.h"
-#include "Display.h"
 
-// Configurations
+/*****************************************************************
+                    *  CONFIGURATIONS  * 
+ *****************************************************************/
+#if (_KEY_PAD_ == E_ON)
+// Keypad Configuration
 const byte ROWS = 4; // rows
 const byte COLS = 4; // columns
 
@@ -22,11 +23,17 @@ byte colPins[COLS] = {28, 29, 30, 31};
 
 //initialize an instance of class NewKeypad
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+#endif
 
+#if (_IR_REMOTE_ == E_ON)
 // Get Key and call back the Software component "Master/Display"
 IRrecv irrecv(37);
 decode_results results;
+/*****************************************************************
+                    *  STATIC FUNCTIONS  * 
+ *****************************************************************/
 
+// Staic Function For converstion The Code capture from IR-Remote to ASCCI
 static char Convert_IRCode2Ascci(uint32_t Code)
 {
     char Ret_Val = 0;
@@ -92,22 +99,29 @@ static char Convert_IRCode2Ascci(uint32_t Code)
     }
     return Ret_Val;
 }
+#endif
+
+/*****************************************************************
+                    *  GLOBAL FUNCTIONS  * 
+ *****************************************************************/
 
 void Capture_init()
 {
+#if (_IR_REMOTE_ == E_ON)
     irrecv.enableIRIn();
     irrecv.blink13(true);
+#endif
 }
 
 void Capture_MainFunction()
 {
-    char key = 0;
+    char key = NO_KEY;
 
-#ifdef _KEYPAD_ENABLE
+#if (_KEY_PAD_ == E_ON)
     key = keypad.getKey();
 #endif
 
-#ifdef _IR_ENABLE
+#if (_IR_REMOTE_ == E_ON)
     if (irrecv.decode(&results))
     {
         key = Convert_IRCode2Ascci(results.value);
@@ -115,18 +129,13 @@ void Capture_MainFunction()
     }
 #endif
 
+// Check If there's key been pressed 
     if (key != NO_KEY)
     {
-#ifdef _Debug_Serial 
+#if (_DEBUG_SERIAL == E_ON)
         Serial.print("You pressed: ");
         Serial.println(key);
 #endif
-        /*
-            * Check the key pressed 
-            * if '+','-' goto Display_Scroll
-            * if '#','0':'9' go to Master services
-        */
-
         if ((key == '#') || (key == '*') ||
             ((key >= '0') && (key <= '9')))
         {
@@ -134,7 +143,7 @@ void Capture_MainFunction()
         }
         else if ((key == '+') || (key == '-'))
         {
-            Display_ScrollSlaveStatus(key);
+//Master_ScrollButton(key);
         }
         else
         {

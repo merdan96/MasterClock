@@ -232,7 +232,7 @@ void Master_SetSlaveModeSrv(uint8_t Key)
             else
             {
             }
-#ifdef _Debug_Serial // for debugging purpose
+#ifdef _DEBUG_SERIAL // for debugging purpose
             Serial.println(SlaveModeInfo.Salve_ID, DEC);
             Serial.println(SlaveModeInfo.Time_mins, DEC);
             if (SlaveModeInfo.CountStyle == COUNT_DOWN)
@@ -285,8 +285,10 @@ void (*Mater_ServiceTable[MAX_SERVICES_NUM])(uint8_t) = {
 
 void Master_HandlerServices_CBK(uint8_t Key)
 {
+#if (_DEBUG_SERIAL == E_ON)
     Serial.print("Called in service ID:");
     Serial.println(Master_CurrentServiceID, DEC);
+#endif
     // Disptacher for Services
     Mater_ServiceTable[Master_CurrentServiceID](Key);
 }

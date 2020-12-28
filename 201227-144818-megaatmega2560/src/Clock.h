@@ -3,21 +3,25 @@
 
 #include "Common.h"
 
+
+
+/*****************************************************************
+                    *  CONFIGURATIONS  * 
+ *****************************************************************/
+
 // Config paramter Clock Source
-/*
-    * RTC
-    * NTP
-    * Gps
-*/  
+/*  _RTC_  , _NTP_ , _GPS_   */  
 #define CLOCK_SOURC     _RTC_ 
-//#define RTC_WRITE_ENABLE 
 
-// Function for Set Clock 
+
+/*****************************************************************
+                    *  GLOABAL FUNCTIONS  * 
+ *****************************************************************/
+
+// Function for init Clock 
 void Clock_Init();
-
 // Function for Update Time every Second
 void Clock_UpdateRealTime();
-
 // Re-sync Clock From USER to Clock Source.  
 void Clock_ReSync();
 

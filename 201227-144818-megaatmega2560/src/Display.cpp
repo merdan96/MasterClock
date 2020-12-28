@@ -1,5 +1,4 @@
 #include "Display.h"
-#include "Master.h"
 
 // Configuration For Lcd
 const int rs = 27, en = 26, d4 = 25, d5 = 24, d6 = 23, d7 = 22;
@@ -16,6 +15,10 @@ static void print2digits(int number)
     }
     lcd.print(number);
 }
+
+/*****************************************************************
+                    *  GLOABAL FUNCTIONS  * 
+ *****************************************************************/
 
 void Display_Init()
 {

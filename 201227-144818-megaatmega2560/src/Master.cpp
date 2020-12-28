@@ -3,7 +3,7 @@
 /*****************************************************************
                     *  GLOBAL VARIABLES  * 
  *****************************************************************/
-// Initalize all Clocks to be Offline
+// Global Variable for holding the state of clocks.
 ClockState_t Clock_Status[NUM_CLOCKS] = {0};
 
 /*****************************************************************
@@ -15,17 +15,20 @@ static uint8_t Clock_HeartbeatPeriod[NUM_CLOCKS] = {0};
 /*****************************************************************
                     *  GLOBAL FUNCTIONS  * 
  *****************************************************************/
+/*
+    * Initalize Master if needed.
+*/
 void Master_init()
 {
     
 }
 
 /*
-    * called every 500 ms
-    * update clock 
-    * Update clock on display 
-    * Publish clock on network 
-    * re-check ack period from Slaves
+    * called every 500 ms, Fs >= 2*Fm  >> Nequist thresom.
+    * update clock from Clock Source.
+    * Update clock on display.
+    * Publish clock on network.
+    * check Heart beat from Clock Slaves.
 */
 void Master_MainFunctionUpdateClock()
 {
@@ -65,7 +68,7 @@ void Master_MainFunctionUpdateClock()
             }
         }
         // Monitor The abcesnt of user
-        if (Display_IsMaxPeriodElpased())
+        if (Page_Timeout())
         {
             Master_UnactivateService();
         }
@@ -76,7 +79,7 @@ void Master_MainFunctionUpdateClock()
 void Master_RxNotifcation_CBK(char *Request_Code, uint8_t Clock_Id)
 {
 
-#ifdef _Debug_Serial // for debugging purpose
+#ifdef _DEBUG_SERIAL // for debugging purpose
     Serial.println(Request_Code);
     Serial.println(Clock_Id, DEC);
 #endif
