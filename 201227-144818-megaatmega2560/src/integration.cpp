@@ -15,7 +15,6 @@ void setup()
   // Network
   Network_Setup();
   // Print Slave Status
-  Display_ChangePage(DEFAULT_PAGE);
   Capture_init();
   Master_init();
   Display_Init();

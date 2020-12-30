@@ -61,6 +61,7 @@ void Slave_RxNewCommand(char* Command)
         Display_ExamMins(Mins);   
     }
     Exam_mode = 1;
+    Network_SentUniCasting("EXAM",0);
 }
 
 void Slave_HandlerService_CBK(uint8_t Key)
@@ -69,6 +70,16 @@ void Slave_HandlerService_CBK(uint8_t Key)
   {
     Start_ExamTime = millis();
     Exam_Running = 1;
+    Network_SentUniCasting("START",0);
+  }
+  else if (Key == '*')
+  {
+    Exam_Running = 0;
+    Network_SentUniCasting("PAUSED",0);
+  }
+  else
+  {
+    /* code */
   }
 }
 

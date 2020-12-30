@@ -1,6 +1,5 @@
 #include "Master.h"
 
-#define SCREEN_TIME_OUT     5
 /*****************************************************************
                     *  GLOBAL VARIABLES  * 
  *****************************************************************/
@@ -11,8 +10,9 @@ extern Master_CurrentServiceID_t Master_CurrentServiceID;
                     *  STATIC VARIABLES  * 
  *****************************************************************/
 // Initalize all Clocks to be zero
-static uint8_t Clock_HeartbeatPeriod[NUM_CLOCKS] = {0};
+static uint8_t Clock_HeartbeatPeriod[NUM_CLOCKS];
 static uint8_t TimeCount_UserAbstance = 0;
+bool Service_page = 0;
 /*****************************************************************
                     *  STATIC FUNCTIONS  * 
  *****************************************************************/
@@ -54,6 +54,7 @@ void Master_init()
     for (uint8_t i = 0; i < NUM_CLOCKS; i++)
     {
         Clock_Status[i] = OFFLINE;
+        Clock_HeartbeatPeriod[i] = 0;
     }
 }
 
@@ -86,13 +87,15 @@ void Master_MainFunctionUpdateClock()
             Master_UnactivateService();
             // Display Main Page.
             Display_ChangePage(DEFAULT_PAGE);
+            Service_page = 0;
         }
         else
         {
             TimeCount_UserAbstance++;
         }
         // Refresh Default page if no service is working
-        if(Master_CurrentServiceID == NOT_ACTIVE)
+        if((Master_CurrentServiceID == NOT_ACTIVE)&&
+            (Service_page == 0)) 
         {
             Display_ClockStatusList(1);
         }
@@ -105,24 +108,31 @@ void Master_HandlerServices_CBK(uint8_t Key)
     TimeCount_UserAbstance = 0;
 }
 
-void Master_RxNotifcation_CBK(char *Request_Code, uint8_t Clock_Id)
+void Master_RxNotifcation_CBK(char *Response_Code, uint8_t Clock_Id)
 {
 
 #ifdef _DEBUG_SERIAL // for debugging purpose
-    Serial.println(Request_Code);
+    Serial.println(Response_Code);
     Serial.println(Clock_Id, DEC);
 #endif
 
-    switch (Request_Code[0])
+    switch (Response_Code[0])
     {
     case 'A': // That mean is Ack from Slave
         Clock_Status[Clock_Id] = ONLINE;
         Clock_HeartbeatPeriod[Clock_Id] = 0;
         break;
 
-    case 'S': // That mean is Start-Exam from Slave
-        Clock_Status[Clock_Id] = ONLINE;
-        Clock_HeartbeatPeriod[Clock_Id] = 0;
+    case 'E': // That mean Exam Mode Is confirmed from Slave
+        Clock_Status[Clock_Id] = EXAM;
+        break;
+
+    case 'S': // That mean is Start Exam from Slave
+        Clock_Status[Clock_Id] = EXAM_START;
+        break;
+
+    case 'P': // That mean is Paused Exam from Slave
+        Clock_Status[Clock_Id] = EXAM_PAUSED;
         break;
 
     default:

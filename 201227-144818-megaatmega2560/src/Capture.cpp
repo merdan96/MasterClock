@@ -129,25 +129,15 @@ void Capture_MainFunction()
     }
 #endif
 
-// Check If there's key been pressed 
+    // Check If there's key been pressed
     if (key != NO_KEY)
     {
 #if (_DEBUG_SERIAL == E_ON)
         Serial.print("You pressed: ");
         Serial.println(key);
 #endif
-        if ((key == '#') || (key == '*') ||
-            ((key >= '0') && (key <= '9')))
-        {
-            Master_HandlerServices_CBK(key);
-        }
-        else if ((key == '+') || (key == '-'))
-        {
-//Master_ScrollButton(key);
-        }
-        else
-        {
-            /* code */
-        }
+
+        Master_HandlerServices_CBK(key);
+        //Master_ScrollButton(key);
     }
 }

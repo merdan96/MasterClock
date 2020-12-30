@@ -16,6 +16,7 @@ SetSlaveModeSubSrvID_t SetSlaveModeSubSrvID = GET_SLAVE_ID;
 static char Buff_[MAX_BUFF_SIZE];
 static uint8_t Buff_Index = 0;
 
+extern bool Service_page;
 /*****************************************************************
                     *  STATIC FUNCTIONS  * 
  *****************************************************************/
@@ -50,8 +51,13 @@ static uint16_t NewKey_HandlerRotuine(uint8_t Key)
         }
         else
         {
-            Ret_Val = 0xFFFF; // this value meaning to go back pervoius page.
         }
+        break;
+    }
+    case 'B':
+    {
+        Ret_Val = 0xFFFF; // this value meaning to go back pervoius page.
+        Buff_Index = 0; 
         break;
     }
     default: // any number is should be captured here to array.
@@ -111,12 +117,14 @@ void Master_ActivateService(uint8_t Key)
     {
         // Display List
         Display_ChangePage(SERVICES_PAGE);
+        Service_page = 1;
         break;
     }
     case '*':
     {
         // Display Default Page.
         Display_ChangePage(DEFAULT_PAGE);
+        Service_page = 0;
         break;
     }
     case '1': // Direct Call
@@ -154,6 +162,7 @@ void Master_SetSlaveModeSrv(uint8_t Key)
         {
             if (Temp == 0xFFFF)
             {
+                Service_page = 1;
                 Display_ChangePage(SERVICES_PAGE);
                 Master_CurrentServiceID = NOT_ACTIVE;
             }
@@ -257,8 +266,6 @@ void Master_SetSlaveModeSrv(uint8_t Key)
             Network_SentUniCasting(Data, SlaveModeInfo.Salve_ID);
             // Go back to intializtion state for Service and sub service.
             Master_UnactivateService();
-            // Put the Slave to be in Exam mode and wait for Confirmation.
-            Clock_Status[SlaveModeInfo.Salve_ID] = EXAM;
             // Display the Default Page.
             Display_ChangePage(DEFAULT_PAGE);
         }

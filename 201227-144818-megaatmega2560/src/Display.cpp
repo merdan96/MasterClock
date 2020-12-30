@@ -23,6 +23,7 @@ static void print2digits(int number)
 void Display_Init()
 {
     lcd.begin(20, 4);
+    Display_ChangePage(DEFAULT_PAGE);
 }
 // Display Online Time
 void Display_UpdateClock()

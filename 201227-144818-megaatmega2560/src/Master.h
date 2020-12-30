@@ -11,9 +11,11 @@
                     *  CONFIGURATIONS  * 
  *****************************************************************/
 // The max period for Slave to ack after that will conside to be offline.
-#define MAX_ALLOWABLE_PERIOD    3  
+#define MAX_ALLOWABLE_PERIOD              5  
 // The max number of Servivces that master offer.
-#define MAX_SERVICES_NUM        3
+#define MAX_SERVICES_NUM                  3
+// The Max Time-out to not return main Page.   
+#define SCREEN_TIME_OUT                   5
 
 // Decalrition of Global Functions.
 void Master_MainFunctionUpdateClock();
