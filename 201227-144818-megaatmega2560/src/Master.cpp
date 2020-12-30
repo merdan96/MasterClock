@@ -5,8 +5,8 @@
                     *  GLOBAL VARIABLES  * 
  *****************************************************************/
 // Global Variable for holding the state of clocks.
-ClockState_t Clock_Status[NUM_CLOCKS] = {0};
-
+ClockState_t Clock_Status[NUM_CLOCKS];
+extern Master_CurrentServiceID_t Master_CurrentServiceID;
 /*****************************************************************
                     *  STATIC VARIABLES  * 
  *****************************************************************/
@@ -51,6 +51,10 @@ static void Check_SlaveHeartBeat()
 */
 void Master_init()
 {
+    for (uint8_t i = 0; i < NUM_CLOCKS; i++)
+    {
+        Clock_Status[i] = OFFLINE;
+    }
 }
 
 /*
@@ -87,7 +91,11 @@ void Master_MainFunctionUpdateClock()
         {
             TimeCount_UserAbstance++;
         }
-        
+        // Refresh Default page if no service is working
+        if(Master_CurrentServiceID == NOT_ACTIVE)
+        {
+            Display_ClockStatusList(1);
+        }
     }
 }
 

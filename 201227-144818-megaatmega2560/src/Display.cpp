@@ -1,5 +1,5 @@
 #include "Display.h"
-
+#include "Master.h"
 // Configuration For Lcd
 const int rs = 27, en = 26, d4 = 25, d5 = 24, d6 = 23, d7 = 22;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
@@ -22,7 +22,7 @@ static void print2digits(int number)
 
 void Display_Init()
 {
-  lcd.begin(20, 4);
+    lcd.begin(20, 4);
 }
 // Display Online Time
 void Display_UpdateClock()
@@ -76,37 +76,43 @@ void Display_ScrollSlaveStatus(uint8_t Key)
         /* code */
     }
 }
-/*
-void Display_ClockStatusList()
+
+void Display_ClockStatusList(uint8_t CurrentClockID)
 {
-    // Max value for this loop will be 2 As it's only two line
+    // Hold ClockId
+    uint8_t ClockId;
+    // Max value for this loop will be 2 As it's only two line in LCD
     for (int LoopCounter = 0; LoopCounter < 2; LoopCounter++)
     {
-        uint8_t Local_CurrentClockId = (MaxCurrent_ClockId + LoopCounter - 1);
-        lcd.setCursor(0, (2+LoopCounter));
-        lcd.print(String("Clock ") + String(Local_CurrentClockId));
-        if (Clock_Status[Local_CurrentClockId] == ONLINE)
+        // ClockId  = first clock Id + the line num.
+        ClockId = CurrentClockID + LoopCounter;
+        lcd.setCursor(0, (2 + LoopCounter));
+        lcd.print(String("Clk ") + String(ClockId));
+        switch (Clock_Status[ClockId])
         {
-            lcd.print(": ONLINE ");
+        case OFFLINE:
+            lcd.print(": OFFLINE    ");
+            break;
+        case ONLINE:
+            lcd.print(": ONLINE     ");
+            break;
+        case EXAM:
+            lcd.print(": EXAM       ");
+            break;
+        case EXAM_START:
+            lcd.print(": EXAM START ");
+            break;
+        case EXAM_PAUSED:
+            lcd.print(": EXAM PAUSED");
+            break;
+        default:
+            break;
         }
-        else if (Clock_Status[Local_CurrentClockId] == OFFLINE)
-        {
-            lcd.print(": OFFLINE");
-        }
-        else if (Clock_Status[Local_CurrentClockId] == EXAM)
-        {
-            lcd.print(":  EXAM  ");
-        }
-        else
-        {
-            /* code         }
-        
     }
 }
-*/
-void Display_Message(char* Msg)
+
+void Display_Message(char *Msg)
 {
     lcd.setCursor(0, 3);
     lcd.print(Msg);
 }
-

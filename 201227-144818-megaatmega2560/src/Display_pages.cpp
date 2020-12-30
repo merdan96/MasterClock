@@ -24,11 +24,7 @@ static void Display_DefaultPage()
 {
     lcd.setCursor(0, 1);
     lcd.print("Clk Id : State      ");
-    lcd.setCursor(0, 2);
-    lcd.print("Clk 1 :  ONLINE     ");
-    lcd.setCursor(0, 3);
-    lcd.print("Clk 2 :  ONLINE     ");
-  //  Display_ClockStatusList();
+    Display_ClockStatusList(1);
 }
 
 static void Display_ServicesPage()

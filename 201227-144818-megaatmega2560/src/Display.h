@@ -33,7 +33,7 @@ void Display_Init();
 void Display_UpdateClock();
 void Display_Key(uint8_t key,uint8_t Pos);
 void Display_ScrollSlaveStatus(uint8_t Key);
-void Display_ClockStatusList();
+void Display_ClockStatusList(uint8_t CurrentClockID);
 void Display_ChangePage(Display_CurrentPage_t Display_CurrentPage);
 void Display_Message(char* Msg);
 bool Page_Timeout();
