@@ -1,5 +1,6 @@
 #include "Master.h"
 
+#define SCREEN_TIME_OUT     5
 /*****************************************************************
                     *  GLOBAL VARIABLES  * 
  *****************************************************************/
@@ -11,7 +12,37 @@ ClockState_t Clock_Status[NUM_CLOCKS] = {0};
  *****************************************************************/
 // Initalize all Clocks to be zero
 static uint8_t Clock_HeartbeatPeriod[NUM_CLOCKS] = {0};
+static uint8_t TimeCount_UserAbstance = 0;
+/*****************************************************************
+                    *  STATIC FUNCTIONS  * 
+ *****************************************************************/
 
+static void Check_SlaveHeartBeat()
+{
+    // Start looping from 1 because num 0 is the Master
+    for (uint16_t LocalCounter = 1; LocalCounter < NUM_CLOCKS; LocalCounter++)
+    {
+        // Cheking if it online so check it's heartbeat period
+        if (Clock_Status[LocalCounter] == ONLINE)
+        {
+            if (Clock_HeartbeatPeriod[LocalCounter] == MAX_ALLOWABLE_PERIOD)
+            {
+                // if it exceed the max allowable then make it offlinex
+                Clock_Status[LocalCounter] = OFFLINE;
+            }
+            else
+            {
+                // if it doesn't increament it's heartbeat
+                Clock_HeartbeatPeriod[LocalCounter]++;
+            }
+        }
+        else
+        {
+            // no need to do hear anything it should be online
+            // if it ack for clk in Callback
+        }
+    }
+}
 /*****************************************************************
                     *  GLOBAL FUNCTIONS  * 
  *****************************************************************/
@@ -20,7 +51,6 @@ static uint8_t Clock_HeartbeatPeriod[NUM_CLOCKS] = {0};
 */
 void Master_init()
 {
-    
 }
 
 /*
@@ -44,36 +74,27 @@ void Master_MainFunctionUpdateClock()
         // Broadcast the clock to slaves.
         Network_SentClockBroadCasting();
         // Checking For The Max Heartbeat-Period every second
-        // Start looping from 1 because num 0 is the Master
-        for (uint16_t LocalCounter = 1; LocalCounter < NUM_CLOCKS; LocalCounter++)
-        {
-            // Cheking if it online so check it's heartbeat period
-            if (Clock_Status[LocalCounter] == ONLINE)
-            {
-                if (Clock_HeartbeatPeriod[LocalCounter] == MAX_ALLOWABLE_PERIOD)
-                {
-                    // if it exceed the max allowable then make it offlinex
-                    Clock_Status[LocalCounter] = OFFLINE;
-                }
-                else
-                {
-                    // if it doesn't increament it's heartbeat
-                    Clock_HeartbeatPeriod[LocalCounter]++;
-                }
-            }
-            else
-            {
-                // no need to do hear anything it should be online
-                // if it ack for clk in Callback
-            }
-        }
+        Check_SlaveHeartBeat();
         // Monitor The abcesnt of user
-        if (Page_Timeout())
+        if (TimeCount_UserAbstance == SCREEN_TIME_OUT)
         {
+            // Un-activate any processing service.
             Master_UnactivateService();
+            // Display Main Page.
+            Display_ChangePage(DEFAULT_PAGE);
+        }
+        else
+        {
+            TimeCount_UserAbstance++;
         }
         
     }
+}
+
+void Master_HandlerServices_CBK(uint8_t Key)
+{
+    Master_ServiceDisptacher(Key);
+    TimeCount_UserAbstance = 0;
 }
 
 void Master_RxNotifcation_CBK(char *Request_Code, uint8_t Clock_Id)

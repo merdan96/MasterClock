@@ -283,7 +283,7 @@ void (*Mater_ServiceTable[MAX_SERVICES_NUM])(uint8_t) = {
     Master_ReSyncCLock,
 };
 
-void Master_HandlerServices_CBK(uint8_t Key)
+void Master_ServiceDisptacher(uint8_t Key)
 {
 #if (_DEBUG_SERIAL == E_ON)
     Serial.print("Called in service ID:");

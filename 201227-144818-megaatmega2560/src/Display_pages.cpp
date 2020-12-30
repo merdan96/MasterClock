@@ -22,10 +22,13 @@ extern LiquidCrystal lcd;
 // Display default Page
 static void Display_DefaultPage()
 {
-    lcd.clear();
     lcd.setCursor(0, 1);
-    lcd.print("Clk Id : State");
-    Display_ClockStatusList();
+    lcd.print("Clk Id : State      ");
+    lcd.setCursor(0, 2);
+    lcd.print("Clk 1 :  ONLINE     ");
+    lcd.setCursor(0, 3);
+    lcd.print("Clk 2 :  ONLINE     ");
+  //  Display_ClockStatusList();
 }
 
 static void Display_ServicesPage()

@@ -76,7 +76,7 @@ void Display_ScrollSlaveStatus(uint8_t Key)
         /* code */
     }
 }
-
+/*
 void Display_ClockStatusList()
 {
     // Max value for this loop will be 2 As it's only two line
@@ -99,12 +99,11 @@ void Display_ClockStatusList()
         }
         else
         {
-            /* code */
-        }
+            /* code         }
         
     }
 }
-
+*/
 void Display_Message(char* Msg)
 {
     lcd.setCursor(0, 3);

@@ -19,6 +19,7 @@
 void Master_MainFunctionUpdateClock();
 void Master_init();
 void Master_UnactivateService();
+void Master_ServiceDisptacher(uint8_t Key);
 
 // Shawaya enums and data types 3la زوقك ^^
 typedef enum
@@ -40,15 +41,6 @@ typedef struct
     uint16_t Time_mins;
     CountStyle_t CountStyle;
 } SlaveModeInfo_T;
-
-typedef enum
-{   
-    OFFLINE,
-    ONLINE,
-    EXAM,
-    EXAM_START,
-    EXAM_PAUSED,
-} ClockState_t;
 
 typedef enum
 {
