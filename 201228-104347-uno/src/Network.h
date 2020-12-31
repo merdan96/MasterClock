@@ -7,6 +7,7 @@
 #include <EthernetUdp.h>
 
 
+#define IP_OFFEST       8
 
 typedef struct 
 {

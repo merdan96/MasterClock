@@ -6,6 +6,6 @@
 #define _Debug_Serial
 #define NUM_CLOCKS  2
 // Clock ID 0 >> Master
-#define CLOCK_ID    1
+#define CLOCK_ID    2
 
 #endif

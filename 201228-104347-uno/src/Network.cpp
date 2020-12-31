@@ -8,7 +8,7 @@ EthernetUDP Udp;
 void Network_Setup()
 {
     Ethernet.init(10);
-    Network_IP[3] = CLOCK_ID + 2;
+    Network_IP[3] = CLOCK_ID + IP_OFFEST;
     Ethernet.begin(TABLE[CLOCK_ID], Network_IP);
 #ifdef _Debug_Serial // for debugging purpose
     // Check for Ethernet hardware present
@@ -53,7 +53,7 @@ void Network_SentClockBroadCasting()
 
 void Network_SentUniCasting(char *data, uint8_t Slave_ID)
 {
-    Network_IP[3] = Slave_ID + 2;
+    Network_IP[3] = Slave_ID + IP_OFFEST;
 
     if (Slave_ID != 0) // Master to Slave
     {
