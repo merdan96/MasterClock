@@ -1,5 +1,6 @@
 #include "Display.h"
 #include "Master.h"
+
 // Configuration For Lcd
 const int rs = 27, en = 26, d4 = 25, d5 = 24, d6 = 23, d7 = 22;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
