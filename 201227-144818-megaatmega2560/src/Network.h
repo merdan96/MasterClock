@@ -24,5 +24,5 @@ void Network_Setup();
 void Network_SentClockBroadCasting();
 void Network_SentUniCasting(char *data, uint8_t Slave_ID);
 void Network_RecieveMainFunction();
-
+void Ntp_UpdateTime(tmElements_t* Tm);
 #endif

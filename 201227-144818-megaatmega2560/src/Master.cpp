@@ -27,7 +27,7 @@ static void Check_SlaveHeartBeat()
         {
             if (Clock_HeartbeatPeriod[LocalCounter] == MAX_ALLOWABLE_PERIOD)
             {
-                // if it exceed the max allowable then make it offlinex
+                // if it exceed the max allowable then make it offline
                 Clock_Status[LocalCounter] = OFFLINE;
             }
             else
@@ -112,8 +112,8 @@ void Master_RxNotifcation_CBK(char *Response_Code, uint8_t Clock_Id)
 {
 
 #ifdef _DEBUG_SERIAL // for debugging purpose
-    Serial.println(Response_Code);
-    Serial.println(Clock_Id, DEC);
+    // Serial.println(Response_Code);
+    // Serial.println(Clock_Id, DEC);
 #endif
 
     switch (Response_Code[0])

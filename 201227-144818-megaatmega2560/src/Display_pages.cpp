@@ -85,8 +85,8 @@ void Display_ChangePage(Display_CurrentPage_t Display_CurrentPage)
     Sdisplay_CurrentPage = Display_CurrentPage;
     STime_counter = 0;
 #if (_DEBUG_SERIAL == E_ON)
-    Serial.print("Display page num:");
-    Serial.println(Sdisplay_CurrentPage, DEC);
+    // Serial.print("Display page num:");
+    // Serial.println(Sdisplay_CurrentPage, DEC);
 #endif
     Dipslay_ArryOfPages[Display_CurrentPage]();
 }

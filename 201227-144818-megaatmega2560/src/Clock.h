@@ -4,7 +4,6 @@
 #include "Common.h"
 
 
-
 /*****************************************************************
                     *  CONFIGURATIONS  * 
  *****************************************************************/
@@ -23,6 +22,6 @@ void Clock_Init();
 // Function for Update Time every Second
 void Clock_UpdateRealTime();
 // Re-sync Clock From USER to Clock Source.  
-void Clock_ReSync();
+void Clock_ReSync(tmElements_t tm);
 
 #endif

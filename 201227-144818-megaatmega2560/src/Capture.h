@@ -1,4 +1,3 @@
-
 #ifndef CAPTURE_h
 #define CAPTURE_h
 #include "Common.h"
@@ -19,14 +18,15 @@
 // Configure IR_Remote To be ON/OFF.
 #define _IR_REMOTE_      E_ON
 
+
 /*****************************************************************
                     *  Gloabal Functions  * 
  *****************************************************************/
 
 // Get Key and Call back Application.
 void Capture_MainFunction();
+
 // Init the Capture 
 void Capture_init();
-
 
 #endif

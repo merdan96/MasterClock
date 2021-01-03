@@ -1,5 +1,4 @@
 #include "Master.h"
-
 //Maximum number of array digits "0->9999"
 #define MAX_BUFF_SIZE 4
 
@@ -57,7 +56,7 @@ static uint16_t NewKey_HandlerRotuine(uint8_t Key)
     case 'B':
     {
         Ret_Val = 0xFFFF; // this value meaning to go back pervoius page.
-        Buff_Index = 0; 
+        Buff_Index = 0;
         break;
     }
     default: // any number is should be captured here to array.
@@ -136,7 +135,7 @@ void Master_ActivateService(uint8_t Key)
     }
     case '2':
     {
-
+        Master_ReSyncCLock(Key);
         break;
     }
     default:
@@ -243,16 +242,16 @@ void Master_SetSlaveModeSrv(uint8_t Key)
             {
             }
 #ifdef _DEBUG_SERIAL // for debugging purpose
-            Serial.println(SlaveModeInfo.Salve_ID, DEC);
-            Serial.println(SlaveModeInfo.Time_mins, DEC);
-            if (SlaveModeInfo.CountStyle == COUNT_DOWN)
-            {
-                Serial.println("Count down");
-            }
-            else
-            {
-                Serial.println("Count Up");
-            }
+            // Serial.println(SlaveModeInfo.Salve_ID, DEC);
+            // Serial.println(SlaveModeInfo.Time_mins, DEC);
+            // if (SlaveModeInfo.CountStyle == COUNT_DOWN)
+            // {
+            //     Serial.println("Count down");
+            // }
+            // else
+            // {
+            //     Serial.println("Count Up");
+            // }
 #endif
             // Local array for Sent pakage
             char Data[8];
@@ -276,12 +275,16 @@ void Master_SetSlaveModeSrv(uint8_t Key)
         break;
     }
 }
+
 /*
     * Service ID: 2
     * To Resync Time with Clock Source.  
 */
 void Master_ReSyncCLock(uint8_t Key)
-{
+{   
+    tmElements_t temp;
+    Ntp_UpdateTime(&temp);
+    Clock_ReSync(temp);
 }
 
 //Array of pointers to function return void takes uint8
@@ -294,8 +297,8 @@ void (*Mater_ServiceTable[MAX_SERVICES_NUM])(uint8_t) = {
 void Master_ServiceDisptacher(uint8_t Key)
 {
 #if (_DEBUG_SERIAL == E_ON)
-    Serial.print("Called in service ID:");
-    Serial.println(Master_CurrentServiceID, DEC);
+    // Serial.print("Called in service ID:");
+    // Serial.println(Master_CurrentServiceID, DEC);
 #endif
     // Disptacher for Services
     Mater_ServiceTable[Master_CurrentServiceID](Key);

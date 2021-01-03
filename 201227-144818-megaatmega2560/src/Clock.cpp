@@ -19,14 +19,12 @@ void Clock_Init()
 }
 
 // Re-sync Clock From USER to Clock Source.
-void Clock_ReSync()
+void Clock_ReSync(tmElements_t tm)
 {
-#if 0
     // Update RTC
-    if (RTC.write(Master_Time))
+    if (RTC.write(tm))
     {
     }
-#endif
 }
 
 // Function for Update Time every Second

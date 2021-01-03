@@ -133,8 +133,8 @@ void Capture_MainFunction()
     if (key != NO_KEY)
     {
 #if (_DEBUG_SERIAL == E_ON)
-        Serial.print("You pressed: ");
-        Serial.println(key);
+        // Serial.print("You pressed: ");
+        // Serial.println(key);
 #endif
 
         Master_HandlerServices_CBK(key);

@@ -23,6 +23,8 @@ void Master_init();
 void Master_UnactivateService();
 void Master_ServiceDisptacher(uint8_t Key);
 
+// Declirtion of private functuins
+void Master_ReSyncCLock(uint8_t Key);
 // Shawaya enums and data types 3la زوقك ^^
 typedef enum
 {
