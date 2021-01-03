@@ -1,9 +1,9 @@
 #include "Common.h"
-#include "Display.h"
-#include "Capture.h"
-#include "Clock.h"
-#include "Master.h"
-#include "Network.h"
+#include <Display.h>
+#include <Capture.h>
+#include <Clock.h>
+#include <Master.h>
+#include <Network.h>
 
 unsigned long Sys_Tick = 0;
 void setup()
