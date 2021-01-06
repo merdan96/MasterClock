@@ -1,4 +1,5 @@
 #include "Master.h"
+
 //Maximum number of array digits "0->9999"
 #define MAX_BUFF_SIZE 4
 
@@ -107,7 +108,6 @@ void Master_UnactivateService()
     * either through Quick/Direct Call.
     * OR through choshing from table.  
 */
-
 void Master_ActivateService(uint8_t Key)
 {
     // show Service list

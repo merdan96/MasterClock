@@ -5,5 +5,6 @@
 void Master_HandlerServices_CBK(uint8_t Key);
 void Master_RxNotifcation_CBK(char *Request_Code, uint8_t Clock_Id);
 void Master_ScrollButton(uint8_t key);
+void Master_RxGuiCommand_Cbk(char* cmd);
 
 #endif

@@ -139,3 +139,8 @@ void Master_RxNotifcation_CBK(char *Response_Code, uint8_t Clock_Id)
         break;
     }
 }
+
+void Master_RxGuiCommand_Cbk()
+{
+    
+}

@@ -10,8 +10,7 @@ void setup()
 {
 #if (_DEBUG_SERIAL == E_ON)
   Serial.begin(9600);
-  while (!Serial)
-    ;
+  while (!Serial);
 #endif
   // Network
   Network_Setup();
