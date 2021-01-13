@@ -5,26 +5,8 @@
 #include "Display.h"
 #include "Clock.h"
 #include "Network.h"
+#include "Master_Cfg.h"
 
-
-/*****************************************************************
-                    *  CONFIGURATIONS  * 
- *****************************************************************/
-// The max period for Slave to ack after that will conside to be offline.
-#define MAX_ALLOWABLE_PERIOD              5  
-// The max number of Servivces that master offer.
-#define MAX_SERVICES_NUM                  3
-// The Max Time-out to not return main Page.   
-#define SCREEN_TIME_OUT                   5
-
-// Decalrition of Global Functions.
-void Master_MainFunctionUpdateClock();
-void Master_init();
-void Master_UnactivateService();
-void Master_ServiceDisptacher(uint8_t Key);
-
-// Declirtion of private functuins
-void Master_ReSyncCLock(uint8_t Key);
 // Shawaya enums and data types 3la زوقك ^^
 typedef enum
 {
@@ -55,6 +37,15 @@ typedef enum
     FINAL_REQ
 } SetSlaveModeSubSrvID_t;
 
-extern ClockState_t Clock_Status[NUM_CLOCKS];
+
+// Decalrition of Global Functions.
+void Master_MainFunctionUpdateClock();
+void Master_init();
+void Master_UnactivateService();
+void Master_ServiceDisptacher(uint8_t Key);
+
+// Declirtion of private functuins
+void Master_ReSyncCLock(uint8_t Key);
+
 
 #endif

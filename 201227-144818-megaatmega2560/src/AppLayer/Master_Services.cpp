@@ -16,7 +16,7 @@ SetSlaveModeSubSrvID_t SetSlaveModeSubSrvID = GET_SLAVE_ID;
 static char Buff_[MAX_BUFF_SIZE];
 static uint8_t Buff_Index = 0;
 
-extern bool Service_page;
+extern bool ServiceList_Status;
 /*****************************************************************
                     *  STATIC FUNCTIONS  * 
  *****************************************************************/
@@ -117,14 +117,14 @@ void Master_ActivateService(uint8_t Key)
     {
         // Display List
         Display_ChangePage(SERVICES_PAGE);
-        Service_page = 1;
+        ServiceList_Status = 1;
         break;
     }
-    case '*':
+    case 'B':
     {
         // Display Default Page.
         Display_ChangePage(DEFAULT_PAGE);
-        Service_page = 0;
+        ServiceList_Status = 0;
         break;
     }
     case '1': // Direct Call
@@ -162,7 +162,7 @@ void Master_SetSlaveModeSrv(uint8_t Key)
         {
             if (Temp == 0xFFFF)
             {
-                Service_page = 1;
+                ServiceList_Status = 1;
                 Display_ChangePage(SERVICES_PAGE);
                 Master_CurrentServiceID = NOT_ACTIVE;
             }
@@ -292,6 +292,7 @@ void (*Mater_ServiceTable[MAX_SERVICES_NUM])(uint8_t) = {
     Master_ActivateService,
     Master_SetSlaveModeSrv,
     Master_ReSyncCLock,
+   // Master_BTngn
 };
 
 void Master_ServiceDisptacher(uint8_t Key)
