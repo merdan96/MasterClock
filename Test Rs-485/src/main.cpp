@@ -28,6 +28,6 @@ void loop()
 {
   // run over and over
   Rs485_Tx(Data);
-  //Rs485_RxMainFunction();
-  delay(1000);
+  // Rs485_RxMainFunction();
+  delay(3000);
 }

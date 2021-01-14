@@ -1,9 +1,12 @@
 #include "Rs_485.h"
 #include <SoftwareSerial.h>
-
+#include "Common.h"
 // Obj Create for Software Serial
 SoftwareSerial RS_485(RX_PIN, TX_PIN); // RX, TXc
 
+/*****************************************************************
+ *                   *  FRAMES  *                                *
+ *****************************************************************/
 typedef struct
 {
     char Frame_Id;
@@ -67,10 +70,9 @@ static void Frame_Parsing(const char *Data)
 
 void Rs485_Init()
 {
-    //Debug
+    // Debug
     Serial.begin(9600);
-    while (!Serial)
-        ;
+    while (!Serial);
     //
     pinMode(CONTROL_PIN, OUTPUT);
     RS_485.begin(BAUD_RATE_TTL);
@@ -96,8 +98,6 @@ void Rs485_RxMainFunction()
     {
         String Temp = RS_485.readString();
         Serial.println(Temp);
-#ifdef _Debug
-#endif
         Frame_Parsing(Temp.c_str());
     }
 }
