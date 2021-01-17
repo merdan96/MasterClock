@@ -9,12 +9,14 @@
  *****************************************************************/
 
 // Baud rate for Uart
-#define BAUD_RATE_TTL       4800
-#define CONTROL_PIN         4 
+#define BAUD_RATE_TTL       9600
 #define ENABLE_TX           HIGH
 #define ENABLE_RX           LOW
-#define TX_PIN              3
-#define RX_PIN              2      
+#define DI_PIN              2
+#define DE_PIN              3      
+#define RE_PIN              4      
+#define RO_PIN              5
+
 
 
 // Global API 

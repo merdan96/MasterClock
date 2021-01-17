@@ -2,13 +2,14 @@
 #include <SoftwareSerial.h>
 #include "Common.h"
 // Obj Create for Software Serial
-SoftwareSerial RS_485(RX_PIN, TX_PIN); // RX, TXc
+SoftwareSerial RS_485(RO_PIN, DI_PIN); // RX, TXc
 
 /*****************************************************************
  *                   *  FRAMES  *                                *
  *****************************************************************/
 typedef struct
 {
+    //"#13:55", // Clock
     char Frame_Id;
     char Hour[2];
     char Clock_Sign;
@@ -17,6 +18,7 @@ typedef struct
 
 typedef struct
 {
+    //
     char Frame_Id;
     char Slave_ID[4];
     char CountStyle;
@@ -41,6 +43,13 @@ static void Frame_Parsing(const char *Data)
         uint8_t Min = atoi(((SyncCLockFrame_t *)Data)->Minuts);
         Serial.println(Hour, DEC);
         Serial.println(Min, DEC);
+#if (CLOCK_ID != 0)
+        char Data[8];
+        char SlaveState = 'A';
+        delay((CLOCK_ID * 50));
+        sprintf(Data, "&000%d%c", CLOCK_ID, SlaveState);
+        Rs485_Tx(Data);
+#endif
         break;
     }
     case '@':
@@ -57,7 +66,7 @@ static void Frame_Parsing(const char *Data)
     case '&': // Feedbacks       Slave  >> Master
     {
         uint8_t Slave_id = atoi(((FeedBackFrame_t *)Data)->Slave_ID);
-        char FeedBack    = ((FeedBackFrame_t *)Data)->FeedBack;
+        char FeedBack = ((FeedBackFrame_t *)Data)->FeedBack;
         Serial.println(Slave_id, DEC);
         Serial.write(FeedBack);
         Serial.println();
@@ -72,32 +81,31 @@ void Rs485_Init()
 {
     // Debug
     Serial.begin(9600);
-    while (!Serial);
+    while (!Serial)
+        ;
     //
-    pinMode(CONTROL_PIN, OUTPUT);
+    pinMode(DE_PIN, OUTPUT);
+    pinMode(RE_PIN, OUTPUT);
     RS_485.begin(BAUD_RATE_TTL);
 }
 
 void Rs485_Tx(char *Str)
 {
-    if (digitalRead(CONTROL_PIN) != ENABLE_TX)
-    {
-        digitalWrite(CONTROL_PIN, ENABLE_TX);
-    }
+    digitalWrite(DE_PIN, ENABLE_TX);
+    digitalWrite(RE_PIN, ENABLE_TX);
     RS_485.print(Str);
 }
 
 void Rs485_RxMainFunction()
 {
-    if (digitalRead(CONTROL_PIN) != ENABLE_RX)
-    {
-        digitalWrite(CONTROL_PIN, ENABLE_RX);
-    }
+
+    digitalWrite(DE_PIN, ENABLE_RX);
+    digitalWrite(RE_PIN, ENABLE_RX);
 
     if (RS_485.available() > 0)
     {
         String Temp = RS_485.readString();
         Serial.println(Temp);
-        Frame_Parsing(Temp.c_str());
+        //    Frame_Parsing(Temp.c_str());
     }
 }

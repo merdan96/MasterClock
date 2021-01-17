@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "Rs_485.h"
+#include "Common.h"
 
 uint32_t Sys_Tick = 0, Count = 0;
 
@@ -9,8 +10,9 @@ void setup()
   Rs485_Init();
 }
 
+#if (CLOCK_ID == MASTER_CLOCK_ID)
 /*
- *  check first char == # >> Clock
+ * Check first char == # >> Clock
  * Update ,,,
  * check first char == @ >> Comand
  * check Id Is yours 
@@ -19,12 +21,12 @@ void setup()
 // From Master 2 Slave
 char Data[][10] =
     {
-        "#13:55",
-        "@0001U0120",
-        "&0001A",
-        "&0001E",
-        "&0001S",
-        "&0001P"};
+        "#13:55", // Clock
+        "@0001U0120", // Comand Exam , 4 digit ID, Count style, 4digit mins 
+        "&0001A", // 4 digit ID, Ack From Slave 2 master 
+        "&0001E", // 4 digit ID, Exam conf From Slave 2 master
+        "&0001S", // 4 digit ID, Exam Start From Slave 2 master
+        "&0001P"};// 4 digit ID,  Pause From Slave 2 master
 
 void Network_TxBroadCasting()
 {
@@ -38,19 +40,27 @@ void Network_TxBroadCasting()
   }
 }
 
-void Network_RxMainFunction()
+
+void loop()
+{
+  if (Sys_Tick % 1000 == 0)
+  {
+    //Network_TxBroadCasting();
+    Rs485_Tx(Data[0]);
+  }
+  delay(1);
+  Sys_Tick++;
+}
+
+#elif (CLOCK_ID == 1)
+void loop()
 {
   Rs485_RxMainFunction();
 }
 
+#elif (CLOCK_ID == 2)
 void loop()
 {
-  // run over and over
-  if (Sys_Tick % 30 == 0)
-  {
-    Network_TxBroadCasting();
-  }
-  Network_RxMainFunction();
-  delay(100);
-  Sys_Tick++;
+  Rs485_RxMainFunction();
 }
+#endif
