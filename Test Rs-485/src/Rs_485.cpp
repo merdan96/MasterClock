@@ -46,7 +46,7 @@ static void Frame_Parsing(const char *Data)
 #if (CLOCK_ID != 0)
         char Data[8];
         char SlaveState = 'A';
-        delay((CLOCK_ID * 1000));
+        delay((CLOCK_ID * 50));
         sprintf(Data, "&000%d%c", CLOCK_ID, SlaveState);
         Rs485_Tx(Data);
 #endif
@@ -65,11 +65,16 @@ static void Frame_Parsing(const char *Data)
     }
     case '&': // Feedbacks       Slave  >> Master
     {
-        uint8_t Slave_id = atoi(((FeedBackFrame_t *)Data)->Slave_ID);
-        char FeedBack = ((FeedBackFrame_t *)Data)->FeedBack;
-        Serial.println(Slave_id, DEC);
-        Serial.write(FeedBack);
-        Serial.println();
+        uint8_t offest = 0;
+        while (Data[offest] == '&')
+        {
+            uint8_t Slave_id = atoi(((FeedBackFrame_t *)(Data + offest))->Slave_ID);
+            char FeedBack = ((FeedBackFrame_t *)(Data + offest))->FeedBack;
+            Serial.println(Slave_id, DEC);
+            Serial.write(FeedBack);
+            Serial.println();
+            offest += 6;
+        }
         break;
     }
     default:
@@ -88,30 +93,22 @@ void Rs485_Init()
     pinMode(RE_PIN, OUTPUT);
     RS_485.begin(BAUD_RATE_TTL);
 }
-uint32_t Txstart;
+
 void Rs485_Tx(char *Str)
 {
     digitalWrite(DE_PIN, ENABLE_TX);
     digitalWrite(RE_PIN, ENABLE_TX);
     RS_485.print(Str);
-    Serial.println("Sent");
-    Txstart = millis();
 }
 
 void Rs485_RxMainFunction()
 {
-    if (millis() > (Txstart + 50))
+    digitalWrite(DE_PIN, ENABLE_RX);
+    digitalWrite(RE_PIN, ENABLE_RX);
+    if (RS_485.available() > 0)
     {
-        digitalWrite(DE_PIN, ENABLE_RX);
-        digitalWrite(RE_PIN, ENABLE_RX);
-        while ((digitalRead(DE_PIN) != ENABLE_RX) &&
-               (digitalRead(RE_PIN) != ENABLE_RX))
-            ;
-        if (RS_485.available() > 0)
-        {
-            String Temp = RS_485.readString();
-            Serial.println(Temp);
-            Frame_Parsing(Temp.c_str());
-        }
+        String Temp = RS_485.readString();
+        Serial.println(Temp);
+        Frame_Parsing(Temp.c_str());
     }
 }

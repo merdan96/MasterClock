@@ -41,7 +41,7 @@ typedef enum
 #define NUM_CLOCKS              10
 
 // Clock-ID to be get form the IP.
-#define CLOCK_ID                0
+#define CLOCK_ID                2
 
 /*****************************************************************
                     *  Extern VARIABLES || Obejcts  * 

@@ -42,17 +42,13 @@ void Network_TxBroadCasting()
 
 void loop()
 {
-  if (Sys_Tick % 5000 == 0)
+  if (millis() % 5000 == 0)
   {
     //Network_TxBroadCasting();
     Rs485_Tx(Data[0]);
   }
-  if (Sys_Tick % 500 == 0)
-  {
-    Rs485_RxMainFunction();
-  }
-  delay(1);
-  Sys_Tick++;
+  
+  Rs485_RxMainFunction();
 }
 
 #elif (CLOCK_ID == 1)
