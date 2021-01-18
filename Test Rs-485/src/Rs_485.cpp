@@ -107,7 +107,6 @@ void Rs485_RxMainFunction()
         while ((digitalRead(DE_PIN) != ENABLE_RX) &&
                (digitalRead(RE_PIN) != ENABLE_RX))
             ;
-        Serial.println("Rx");
         if (RS_485.available() > 0)
         {
             String Temp = RS_485.readString();
