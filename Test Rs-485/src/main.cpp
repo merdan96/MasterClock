@@ -42,12 +42,11 @@ void Network_TxBroadCasting()
 
 void loop()
 {
-  if (millis() % 5000 == 0)
+  if (millis() % 3000 == 0)
   {
     //Network_TxBroadCasting();
     Rs485_Tx(Data[0]);
   }
-  
   Rs485_RxMainFunction();
 }
 

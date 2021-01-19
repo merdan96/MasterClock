@@ -111,7 +111,7 @@ void Master_MainFunctionUpdateClock()
         // Display only updated Clock.
         Display_UpdateClock();
         // Broadcast the clock to slaves.
-        Network_SentClockBroadCasting();
+        //Network_SentClockBroadCasting();
         // Checking For The Max Heartbeat-Period every second
         Check_SlaveHeartBeat();
         // Monitor The abcesnt of user

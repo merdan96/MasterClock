@@ -16,10 +16,10 @@ char keys[ROWS][COLS] = {
     {'*', '0', '#', '+'}};
 
 //connect to the row pinouts of the keypad
-byte rowPins[ROWS] = {32, 33, 34, 35};
+byte rowPins[ROWS] = {A4, A5, A6, A7};
 
 //connect to the column pinouts of the keypad
-byte colPins[COLS] = {28, 29, 30, 31};
+byte colPins[COLS] = {A0, A1, A2, A3};
 
 //initialize an instance of class NewKeypad
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);

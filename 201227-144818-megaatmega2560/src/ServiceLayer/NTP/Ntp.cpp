@@ -1,7 +1,7 @@
 #include "Ntp.h"
 #include "Network.h"
 #include <TimeLib.h>
-
+/*
 #define NTP_MIN_REQUEST_INTERVAL 10000
 // Static Paramters
 EthernetUDP Udp_Ntp;
@@ -12,7 +12,7 @@ const char timeServer[] = "eg.pool.ntp.org"; // Syncing NTP server
 const int timeZone = 2; // For Egypt
 
 unsigned long Last_NtpRequest = 0;
-/*-------- NTP code ----------*/
+/*-------- NTP code ----------
 const int NTP_PACKET_SIZE = 48;         // NTP time is in the first 48 bytes of message
 byte NTP_packetBuffer[NTP_PACKET_SIZE]; //buffer to hold incoming & outgoing packets
 
@@ -106,3 +106,4 @@ time_t getNtpTime()
 }
 
 
+*/

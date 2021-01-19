@@ -17,7 +17,7 @@
 /*****************************************************************
                     *  GLOBAL FUNCTIONS  * 
  *****************************************************************/
-
+/*
 typedef struct 
 
     char Sign;
@@ -62,7 +62,6 @@ void GUi_UpdateSlaveStuts()
 {
     
 }
-*/
 
 
 SoftwareSerial mySerial(2, 3); // RX, TX
@@ -106,3 +105,5 @@ void loop()
         //#endif
     }
 }
+
+*/
