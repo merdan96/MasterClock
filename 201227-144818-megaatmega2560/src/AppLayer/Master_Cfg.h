@@ -1,11 +1,10 @@
 #ifndef MASTER_CFG_h
 #define MASTER_CFG_h
 
-
-
 /*****************************************************************
                     *  CONFIGURATIONS  * 
  *****************************************************************/
+
 // The max period for Slave to ack in Seconds after that will consider offline.
 #define MAX_ALLOWABLE_PERIOD              5  
 

@@ -4,10 +4,10 @@
 #include <Arduino.h>
 #include "Common.h"
 
+
 /*****************************************************************
                     *  CONFIGURATIONS  * 
  *****************************************************************/
-
 // Baud rate for Uart
 #define BAUD_RATE_TTL 9600
 #define ENABLE_TX HIGH
@@ -30,6 +30,6 @@ void Rs485_Init();
 
 void Rs485_Tx(char *Str);
 
-void Rs485_RxMainFunction();
+RetVal_t Rs485_Rx(char *Str);
 
 #endif

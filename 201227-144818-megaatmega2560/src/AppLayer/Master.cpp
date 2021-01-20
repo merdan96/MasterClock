@@ -9,7 +9,6 @@
         - Publish Clock ,And change slave mood to be Exam
 
 */
-
 /*****************************************************************
                     *  GLOBAL VARIABLES  * 
  *****************************************************************/
@@ -87,7 +86,7 @@ void Master_init()
     for (uint8_t i = 0; i < NUM_CLOCKS; i++)
     {
         Clock_Status[i] = OFFLINE;
-        Clock_HeartbeatPeriod[i] = 0; 
+        Clock_HeartbeatPeriod[i] = 0;
     }
 }
 
@@ -111,7 +110,7 @@ void Master_MainFunctionUpdateClock()
         // Display only updated Clock.
         Display_UpdateClock();
         // Broadcast the clock to slaves.
-        //Network_SentClockBroadCasting();
+        Network_SentClockBroadCasting();
         // Checking For The Max Heartbeat-Period every second
         Check_SlaveHeartBeat();
         // Monitor The abcesnt of user
@@ -128,13 +127,12 @@ void Master_MainFunctionUpdateClock()
 /*****************************************************************
                     *  CALL-BACKs FUNCTIONS  * 
  *****************************************************************/
-// Call back From Capture Module. 
+// Call back From Capture Module.
 void Master_HandlerServices_CBK(uint8_t Key)
 {
     Master_ServiceDisptacher(Key);
     TimeCount_UserAbstance = 0;
 }
-
 
 void Master_RxNotifcation_CBK(char *Response_Code, uint8_t Clock_Id)
 {
@@ -170,10 +168,8 @@ void Master_RxNotifcation_CBK(char *Response_Code, uint8_t Clock_Id)
 
 void Master_RxGuiCommand_Cbk()
 {
-    
 }
 
 void Master_ScrollButton_CBK(uint8_t key)
 {
-    
 }

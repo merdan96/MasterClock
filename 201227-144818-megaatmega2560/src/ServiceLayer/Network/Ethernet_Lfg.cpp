@@ -1,4 +1,4 @@
-#include "Network.h"
+#include "Ethernet_Wrapper.h"
 
 
 byte TABLE[NUM_CLOCKS + 1][6] =
@@ -9,7 +9,7 @@ byte TABLE[NUM_CLOCKS + 1][6] =
 };
 
 
-Network_Cfg_t  Network =
+EthernetCfg_t  Network =
 {
     8888,
     9631,

@@ -27,6 +27,11 @@ typedef enum
     EXAM_PAUSED,
 } ClockState_t;
 
+typedef enum
+{
+    E_NOT_OK,
+    E_OK
+} RetVal_t;
 
 /*****************************************************************
                     *  COMMON CONFIGURATIONS  * 

@@ -283,7 +283,7 @@ void Master_SetSlaveModeSrv(uint8_t Key)
 void Master_ReSyncCLock(uint8_t Key)
 {   
     tmElements_t temp;
-    Ntp_UpdateTime(&temp);
+    //Ntp_UpdateTime(&temp);
     Clock_ReSync(temp);
 }
 
