@@ -22,6 +22,6 @@ void loop()
 {
   Display_mainFunction();
   Network_RecieveMainFunction();
-  Capture_MainFunction();
-  Slave_MainFunction();
+  // Capture_MainFunction();
+  // Slave_MainFunction();
 }

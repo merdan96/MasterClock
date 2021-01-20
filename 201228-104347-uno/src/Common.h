@@ -8,5 +8,9 @@
 #include "Common_Confg.h"
 
 extern HardwareSerial Serial;
-
+typedef enum
+{
+    E_NOT_OK,
+    E_OK
+} RetVal_t;
 #endif

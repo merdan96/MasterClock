@@ -72,7 +72,7 @@ static char Convert_IRCode2Ascci(uint32_t Code)
 void Capture_init()
 {
     irrecv.enableIRIn();
-    irrecv.blink13(true);
+    //irrecv.blink13(true);
 }
 
 void Capture_MainFunction()

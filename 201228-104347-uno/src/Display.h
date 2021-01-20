@@ -1,4 +1,3 @@
-
 #ifndef DISPLAY_h
 #define DISPLAY_h
 

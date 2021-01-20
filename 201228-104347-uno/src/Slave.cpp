@@ -19,16 +19,16 @@ void Slave_RxUpdateClock_CBK(char *Clock_Str)
 {
   if (Exam_mode != 1)
   {
-    char A_Clock[5];
-    A_Clock[0] = Clock_Str[0];
-    A_Clock[1] = Clock_Str[1];
-    A_Clock[2] = Clock_Str[3];
-    A_Clock[3] = Clock_Str[4];
+    char A_Clock[6];
+    A_Clock[0] = Clock_Str[1];
+    A_Clock[1] = Clock_Str[2];
+    A_Clock[2] = Clock_Str[4];
+    A_Clock[3] = Clock_Str[5];
     A_Clock[4] = 0;
     uint32_t IntegarClock = atoi(A_Clock);
     Display_UpdateClock(IntegarClock);
     // Sent back ack
-    Network_SentUniCasting("Ack", 0);
+    // Network_SentUniCasting("Ack", 0);
   }
   else
   {
@@ -38,7 +38,7 @@ void Slave_RxUpdateClock_CBK(char *Clock_Str)
 
 void Slave_RxNewCommand(char *Command)
 {
-  Serial.println(Command);
+  // Serial.println(Command);
   char mins[4] = {0};
   for (uint8_t i = 1; i < 5; i++)
   {
@@ -51,8 +51,8 @@ void Slave_RxNewCommand(char *Command)
     mins[i - 1] = Command[i];
   }
   Mins = atoi(mins);
-  Serial.println(Mins, DEC);
-  Serial.println(Dirction);
+  // Serial.println(Mins, DEC);
+  // Serial.println(Dirction);
   Exam_Running = 0;
   if (Dirction == 'U')
   {
@@ -107,7 +107,7 @@ void Slave_MainFunction()
           Exam_mode = 0;
           Exam_Running = 0;
         }
-        Serial.println(Mins, DEC);
+        // Serial.println(Mins, DEC);
         Display_ExamMins(Mins);
       }
       else
@@ -118,7 +118,7 @@ void Slave_MainFunction()
           Exam_mode = 0;
           Exam_Running = 0;
         }
-        Serial.println(Mins_UpDirction, DEC);
+        // Serial.println(Mins_UpDirction, DEC);
         Display_ExamMins(Mins_UpDirction);
       }
       //  }

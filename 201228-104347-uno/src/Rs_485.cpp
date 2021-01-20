@@ -2,11 +2,11 @@
 #include <HardwareSerial.h>
 #include "Common.h"
 // Obj Create for Software Serial
-#define RS_485      Serial1
+#define RS_485   Serial
 void Rs485_Init()
 {
-
     pinMode(DE_PIN, OUTPUT);
+    
     pinMode(RE_PIN, OUTPUT);
     RS_485.begin(BAUD_RATE_TTL);
 }

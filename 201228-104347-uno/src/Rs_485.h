@@ -13,13 +13,13 @@
 #define ENABLE_TX HIGH
 #define ENABLE_RX LOW
 #if (CLOCK_ID != 0)
-#define DI_PIN 2
-#define DE_PIN 3
-#define RE_PIN 4
-#define RO_PIN 5
+#define DE_PIN 2
+#define RE_PIN 3
 #else
-#define DE_PIN 17
-#define RE_PIN 16
+#define DI_PIN 8
+#define DE_PIN 9
+#define RE_PIN 10
+#define RO_PIN 11
 #endif
 
 // Global API
