@@ -69,7 +69,7 @@ void Network_RecieveMainFunction()
 
 #if (CLOCK_ID == 0) // Master           \
                     // Call Notifcation \
-                    Master_RxNotifcation_CBK(packetBuffer, (remote[3] - IP_OFFEST));
+    Master_RxNotifcation_CBK(packetBuffer, (remote[3] - IP_OFFEST));
 #else
         
 #endif

@@ -100,6 +100,8 @@ void Master_MainFunctionUpdateClock()
 {
     // To Keep Track LastSecond.
     static uint8_t LastSecond = 0;
+    static uint8_t LastMinute = 0;
+
     // Call Clock To Update time.
     Clock_UpdateRealTime();
     // Check If new Second
@@ -109,8 +111,12 @@ void Master_MainFunctionUpdateClock()
         LastSecond = Master_Time.Second;
         // Display only updated Clock.
         Display_UpdateClock();
-        // Broadcast the clock to slaves.
-        Network_SentClockBroadCasting();
+        if (Master_Time.Minute != LastMinute)
+        {
+            LastMinute = Master_Time.Minute;
+            // Broadcast the clock to slaves.
+            Network_SentClockBroadCasting();
+        }
         // Checking For The Max Heartbeat-Period every second
         Check_SlaveHeartBeat();
         // Monitor The abcesnt of user
