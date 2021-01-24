@@ -26,6 +26,7 @@ void Slave_RxUpdateClock_CBK(char *Clock_Str)
     A_Clock[3] = Clock_Str[5];
     A_Clock[4] = 0;
     uint32_t IntegarClock = atoi(A_Clock);
+    // TODO Check if integar clock less than 60
     Display_UpdateClock(IntegarClock);
     // Sent back ack
     // Network_SentUniCasting("Ack", 0);

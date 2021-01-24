@@ -23,7 +23,7 @@ void setup()
 
 void loop()
 {
-  if ((Sys_Tick % 5) == 0)
+  if ((Sys_Tick % 150) == 0)
   {
     Master_MainFunctionUpdateClock();
   }

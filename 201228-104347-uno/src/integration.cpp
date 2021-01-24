@@ -14,33 +14,37 @@ void setup()
 {
 #ifdef _Debug_Serial
   Serial.begin(9600);
-  while (!Serial);
+  while (!Serial)
+    ;
 #endif
   // Network
   Network_Setup();
   Display_init();
   Capture_init();
-   // Now set up two tasks to run independently.
-  xTaskCreate(
-    Task_Display_mainFunction
-    ,  "Display"   // A name just for humans
-    ,  128  // Stack size
-    ,  NULL
-    ,  1  // priority
-    ,  NULL );
+  // Now set up two tasks to run independently.
+  /* xTaskCreate(
+      Task_Display_mainFunction, "Display" // A name just for humans
+      ,
+      128 // Stack size
+      ,
+      NULL, 1 // priority
+      ,
+      NULL);
 
   xTaskCreate(
-    TaskNetwork_RecieveMainFunction
-    ,  "Network"
-    ,  128 // This stack size can be checked & adjusted by reading Highwater
-    ,  NULL
-    ,  2  // priority
-    ,  NULL );
+      TaskNetwork_RecieveMainFunction, "Network", 128 // This stack size can be checked & adjusted by reading Highwater
+      ,
+      NULL, 2 // priority
+      ,
+      NULL);
+*/
+  SREG |= (1 << 7);
 }
 
 void loop()
 {
-  
+  Display_mainFunction();
+  Network_RecieveMainFunction();
 }
 
 void Task_Display_mainFunction(void *pvParameters)
@@ -48,7 +52,7 @@ void Task_Display_mainFunction(void *pvParameters)
   for (;;)
   {
     Display_mainFunction();
-    vTaskDelay(1/portTICK_PERIOD_MS);
+    vTaskDelay(1 / portTICK_PERIOD_MS);
   }
 }
 

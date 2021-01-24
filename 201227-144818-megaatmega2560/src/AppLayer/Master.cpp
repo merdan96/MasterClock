@@ -111,12 +111,12 @@ void Master_MainFunctionUpdateClock()
         LastSecond = Master_Time.Second;
         // Display only updated Clock.
         Display_UpdateClock();
-        if (Master_Time.Minute != LastMinute)
-        {
-            LastMinute = Master_Time.Minute;
+        // if (Master_Time.Minute != LastMinute)
+        // {
+            // LastMinute = Master_Time.Minute;
             // Broadcast the clock to slaves.
             Network_SentClockBroadCasting();
-        }
+        // }
         // Checking For The Max Heartbeat-Period every second
         Check_SlaveHeartBeat();
         // Monitor The abcesnt of user
