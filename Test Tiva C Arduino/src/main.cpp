@@ -1,9 +1,15 @@
+// include the library code:
 #include <Arduino.h>
 
-void setup() {
-  // put your setup code here, to run once:
+void setup()
+{
+  pinMode(RED_LED,OUTPUT);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop()
+{
+  digitalWrite(RED_LED,HIGH);
+  delay(1000);
+  digitalWrite(RED_LED,LOW);
+  delay(1000);
 }
