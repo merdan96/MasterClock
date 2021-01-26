@@ -15,6 +15,7 @@ char Dirction;
 bool Exam_mode = 0;
 bool Exam_Running = 0;
 char Str_[8];
+uint32_t last_int = 0;
 void Slave_RxUpdateClock_CBK(char *Clock_Str)
 {
   if (Exam_mode != 1)
@@ -27,7 +28,11 @@ void Slave_RxUpdateClock_CBK(char *Clock_Str)
     A_Clock[4] = 0;
     uint32_t IntegarClock = atoi(A_Clock);
     // TODO Check if integar clock less than 60
-    Display_UpdateClock(IntegarClock);
+    if (last_int != IntegarClock)
+    {
+      last_int = IntegarClock;
+      Display_UpdateClock(IntegarClock);
+    }
     // Sent back ack
     // Network_SentUniCasting("Ack", 0);
   }
