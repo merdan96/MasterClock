@@ -2,9 +2,9 @@
 #include <HardwareSerial.h>
 #include "Common.h"
 // Obj Create for Software Serial
-#define RS_485 Serial
+//#define RS_485 Serial
 
-char buff[10];
+char buff[15];
 int count = 0;
 int FLAG = 0;
 
@@ -12,7 +12,10 @@ int FLAG = 0;
 ISR(USART_RX_vect)
 {
     buff[count++] = UDR0;
-    FLAG = 1;
+    if (count >= 6)
+    {
+        FLAG = 1;
+    }
 }
 #endif
 
@@ -23,7 +26,7 @@ void Rs485_Init()
 #ifdef RS_485
     RS_485.begin(BAUD_RATE_TTL);
 #else
-    UCSR0A |= 1 << 1;
+    UCSR0A |= 1 << U2X0;
     UCSR0B |= (1 << 7) | (1 << 4) | (1 << 3);
     UCSR0C |= (1 << 1) | (1 << 2);
     UBRR0L = 103; // 19200
@@ -62,8 +65,8 @@ RetVal_t Rs485_Rx(char *Str)
         FLAG = 0;
         ret_val = E_OK;
         strcpy(Str, buff);
-        memset(buff,0,count);
-        count =0;
+        memset(buff, 0, count);
+        count = 0;
     }
 #endif
     return ret_val;
