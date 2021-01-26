@@ -56,7 +56,7 @@ extern HardwareSerial Serial;
 //Main entity Of Master Time
 extern tmElements_t Master_Time;
 
-extern ClockState_t Clock_Status[NUM_CLOCKS];
+//extern ClockState_t Clock_Status[NUM_CLOCKS];
 
 
 #endif
