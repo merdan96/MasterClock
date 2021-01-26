@@ -2,7 +2,6 @@
 #define CLOCK_h
 #include "Common.h"
 
-
 /*****************************************************************
                     *  CONFIGURATIONS  * 
  *****************************************************************/
@@ -15,11 +14,10 @@
                     *  GLOABAL FUNCTIONS  * 
  *****************************************************************/
 
-// Function for init Clock 
+// Function for init Clock
 void Clock_Init();
 // Function for Update Time every Second
 void Clock_UpdateRealTime();
-// Re-sync Clock From USER to Clock Source.  
+// Re-sync Clock From USER to Clock Source.
 void Clock_ReSync(tmElements_t tm);
- */
 #endif
