@@ -28,7 +28,7 @@ void Display_Init()
 void Display_UpdateClock()
 {
     // To be in the middle
-    lcd.setCursor(5, 0);
+    lcd.setCursor(6, 0);
     print2digits(Master_Time.Hour);
     lcd.write(':');
     print2digits(Master_Time.Minute);

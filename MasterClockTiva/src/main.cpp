@@ -2,6 +2,8 @@
 #include "Common.h"
 #include "Display/Display.h"
 #include "Network/Network.h"
+#include "AppLayer/Master.h"
+#include "Capture/Capture.h"
 
 void setup()
 {
@@ -9,20 +11,20 @@ void setup()
   Clock_Init();
   Display_Init();
   Network_Setup();
+  //Master_init();
 }
-int count =0;
+static uint32_t Sys_Tick = 0;
 void loop()
 {
-  Clock_UpdateRealTime();
-  Display_UpdateClock();
-  if (Master_Time.Second % 15 == 0)
+  if (Sys_Tick % 50 == 0)
   {
-    Network_SentClockBroadCasting();
+    Master_MainFunctionUpdateClock();
   }
-  Serial.print(Master_Time.Hour, DEC);
-  Serial.print('/');
-  Serial.print(Master_Time.Minute, DEC);
-  Serial.print('/');
-  Serial.println(Master_Time.Second, DEC);
-  delay(1000);
+  if (Sys_Tick % 10 == 0)
+  {
+    Capture_MainFunction();
+  }
+  Network_RecieveMainFunction();
+  delay(10);
+  Sys_Tick++;
 }

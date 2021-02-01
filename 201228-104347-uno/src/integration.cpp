@@ -22,22 +22,25 @@ void setup()
   Display_init();
   Capture_init();
   // Now set up two tasks to run independently.
-  /* xTaskCreate(
-      Task_Display_mainFunction, "Display" // A name just for humans
-      ,
-      128 // Stack size
-      ,
-      NULL, 1 // priority
-      ,
-      NULL);
+  // xTaskCreate(
+  //     Task_Display_mainFunction, 
+  //     "Display" // A name just for humans
+  //     ,
+  //     128 // Stack size
+  //     ,
+  //     NULL,
+  //     3 // priority
+  //     ,
+  //     NULL);
 
-  xTaskCreate(
-      TaskNetwork_RecieveMainFunction, "Network", 128 // This stack size can be checked & adjusted by reading Highwater
-      ,
-      NULL, 2 // priority
-      ,
-      NULL);
-*/
+  // xTaskCreate(
+  //     TaskNetwork_RecieveMainFunction,
+  //     "Network",
+  //     128 // This stack size can be checked & adjusted by reading Highwater
+  //     ,
+  //     NULL, 
+  //     1,
+  //     NULL);
   SREG |= (1 << 7);
 }
 
