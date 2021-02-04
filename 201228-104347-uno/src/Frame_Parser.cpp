@@ -17,9 +17,10 @@ void Frame_Parsing(const char *Data)
 #if (CLOCK_ID != 0)
         char Data[8];
         char SlaveState = 'A';
-        delay((CLOCK_ID * 50));
+        delay(50);
         sprintf(Data, "&000%d%c", CLOCK_ID, SlaveState);
-      //  Rs485_Tx(Data);
+        Rs485_Tx(Data);
+        delay(30);
 #endif
         break;
     }

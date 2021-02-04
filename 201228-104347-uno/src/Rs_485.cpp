@@ -2,7 +2,7 @@
 #include <HardwareSerial.h>
 #include "Common.h"
 // Obj Create for Software Serial
-//#define RS_485 Serial
+#define RS_485 Serial
 
 char buff[15];
 int count = 0;
@@ -38,6 +38,7 @@ void Rs485_Tx(char *Str)
 {
     digitalWrite(DE_PIN, ENABLE_TX);
     digitalWrite(RE_PIN, ENABLE_TX);
+    delay(30);
 #ifdef RS_485
     RS_485.print(Str);
 #else

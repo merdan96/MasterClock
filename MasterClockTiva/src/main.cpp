@@ -16,15 +16,12 @@ void setup()
 static uint32_t Sys_Tick = 0;
 void loop()
 {
-  if (Sys_Tick % 50 == 0)
+  if (Sys_Tick % 5 == 0)
   {
     Master_MainFunctionUpdateClock();
   }
-  if (Sys_Tick % 10 == 0)
-  {
-    Capture_MainFunction();
-  }
+  Capture_MainFunction();
+  delay(100);
   Network_RecieveMainFunction();
-  delay(10);
   Sys_Tick++;
 }
