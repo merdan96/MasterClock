@@ -11,7 +11,7 @@ void setup()
   Clock_Init();
   Display_Init();
   Network_Setup();
-  //Master_init();
+  Master_init();
   timerInit();
 }
 static uint32_t Sys_Tick = 0;

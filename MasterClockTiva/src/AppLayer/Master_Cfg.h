@@ -6,7 +6,7 @@
  *****************************************************************/
 
 // The max period for Slave to ack in Seconds after that will consider offline.
-#define MAX_ALLOWABLE_PERIOD              5  
+#define MAX_ALLOWABLE_PERIOD              30  
 
 // The max number of Servivces that master offer.
 #define MAX_SERVICES_NUM                  3

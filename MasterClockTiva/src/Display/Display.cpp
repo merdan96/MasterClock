@@ -79,36 +79,36 @@ void Display_ScrollSlaveStatus(uint8_t Key)
 
 void Display_ClockStatusList(uint8_t CurrentClockID)
 {
-    // // Hold ClockId
-    // uint8_t ClockId;
-    // // Max value for this loop will be 2 As it's only two line in LCD
-    // for (int LoopCounter = 0; LoopCounter < 2; LoopCounter++)
-    // {
-    //     // ClockId  = first clock Id + the line num.
-    //     ClockId = CurrentClockID + LoopCounter;
-    //     lcd.setCursor(0, (2 + LoopCounter));
-    //     lcd.print(String("Clk ") + String(ClockId));
-    //     switch (Clock_Status[ClockId])
-    //     {
-    //     case OFFLINE:
-    //         lcd.print(": OFFLINE    ");
-    //         break;
-    //     case ONLINE:
-    //         lcd.print(": ONLINE     ");
-    //         break;
-    //     case EXAM:
-    //         lcd.print(": EXAM       ");
-    //         break;
-    //     case EXAM_START:
-    //         lcd.print(": EXAM START ");
-    //         break;
-    //     case EXAM_PAUSED:
-    //         lcd.print(": EXAM PAUSED");
-    //         break;
-    //     default:
-    //         break;
-    //     }
-    // }
+    // Hold ClockId
+    uint8_t ClockId;
+    // Max value for this loop will be 2 As it's only two line in LCD
+    for (int LoopCounter = 0; LoopCounter < 2; LoopCounter++)
+    {
+        // ClockId  = first clock Id + the line num.
+        ClockId = CurrentClockID + LoopCounter;
+        lcd.setCursor(0, (2 + LoopCounter));
+        lcd.print(String("Clk ") + String(ClockId));
+        switch (Clock_Status[ClockId])
+        {
+        case OFFLINE:
+            lcd.print(": OFFLINE    ");
+            break;
+        case ONLINE:
+            lcd.print(": ONLINE     ");
+            break;
+        case EXAM:
+            lcd.print(": EXAM       ");
+            break;
+        case EXAM_START:
+            lcd.print(": EXAM START ");
+            break;
+        case EXAM_PAUSED:
+            lcd.print(": EXAM PAUSED");
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void Display_Message(char *Msg)

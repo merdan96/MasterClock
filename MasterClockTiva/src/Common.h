@@ -43,7 +43,7 @@ typedef enum
 #define _GUI_                   E_OFF
 
 // Numbers Of Slaves Clock.
-#define NUM_CLOCKS              10
+#define NUM_CLOCKS              2
 
 // Clock-ID to be get form the IP.
 #define CLOCK_ID                MASTER_CLOCK_ID
@@ -56,7 +56,7 @@ extern HardwareSerial Serial;
 //Main entity Of Master Time
 extern tmElements_t Master_Time;
 
-//extern ClockState_t Clock_Status[NUM_CLOCKS];
+extern ClockState_t Clock_Status[NUM_CLOCKS];
 
 
 #endif

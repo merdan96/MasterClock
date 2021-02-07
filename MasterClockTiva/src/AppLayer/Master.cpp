@@ -96,7 +96,7 @@ void Master_init()
     * update clock from Clock Source, Display, Publish clock on network.
     * check Heart beat from Clock Slaves.
 */
-
+uint8_t Last_Second = 0;
 void Master_MainFunctionUpdateClock()
 {
     // Call Clock To Update time.
@@ -106,27 +106,20 @@ void Master_MainFunctionUpdateClock()
     {
         Network_SentClockBroadCasting();
     }
-    // if (Master_Time.Second != LastSecond)
-    // {
-    //     // Update LastSecond Elpased.
-    //     LastSecond = Master_Time.Second;
-    //     // Display only updated Clock.
-    //     // if (Master_Time.Minute != LastMinute)
-    //     // {
-    //     // LastMinute = Master_Time.Minute;
-    //     // Broadcast the clock to slaves.
-    //     // }
-    //     // Checking For The Max Heartbeat-Period every second
-    //     Check_SlaveHeartBeat();
-    //     // Monitor The abcesnt of user
-    //     Check_UserAbstance();
-    //     // Refresh Default page if no service is working and Service List Also.
-    //     if ((Master_CurrentServiceID == NOT_ACTIVE) &&
-    //         (ServiceList_Status == false))
-    //     {
-    //         Display_ClockStatusList(1);
-    //     }
-    // }
+    if (Master_Time.Second != Last_Second)
+    {
+        Last_Second = Master_Time.Second; 
+        // Checking For The Max Heartbeat-Period every second
+        Check_SlaveHeartBeat();
+        // Monitor The abcesnt of user
+        Check_UserAbstance();
+        // Refresh Default page if no service is working and Service List Also.
+        if ((Master_CurrentServiceID == NOT_ACTIVE) &&
+            (ServiceList_Status == false))
+        {
+            Display_ClockStatusList(1);
+        }
+    }
 }
 
 /*****************************************************************

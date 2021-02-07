@@ -51,6 +51,7 @@ void Frame_Parsing(const char *Data)
             Serial.println(Slave_id, DEC);
             Serial.write(FeedBack);
             Serial.println();
+            Master_RxNotifcation_CBK(FeedBack, Slave_id);
             offest += 6;
         }
         break;
@@ -59,7 +60,6 @@ void Frame_Parsing(const char *Data)
         break;
     }
 }
-
 
 void Network_Setup()
 {
@@ -123,7 +123,6 @@ void Network_RecieveMainFunction()
         Frame_Parsing(Network_PacketBuffer);
 
 #if (CLOCK_ID == 0)
-        Master_RxNotifcation_CBK(FeedBack, Slave_id);
 #else
         Slave_ClockUpdate_CBK();
 #endif
