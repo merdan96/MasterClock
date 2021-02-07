@@ -17,14 +17,14 @@ const byte COLS = 4; // columns
 
 //define the symbols on the buttons of the keypads
 char keys[ROWS][COLS] = {
-    {'1', '2', '3', 'A'},
-    {'4', '5', '6', 'B'},
-    {'7', '8', '9', '-'},
-    {'*', '0', '#', '+'}};
+    {'1', '4', '7', '*'},
+    {'2', '5', '8', '0'},
+    {'3', '6', '9', '#'},
+    {'A', 'B', '-', '+'}};
 
-byte colPins[ROWS] = {PE_2, PE_1, PE_0, PD_3}; //connect to the row pinouts of the keypad
+byte colPins[ROWS] = {PB_6, PA_4, PA_3, PA_2}; //connect to the row pinouts of the keypad
 
-byte rowPins[COLS] = {PE_3, PC_6, PA_4, PC_7}; //connect to the column pinouts of the keypad
+byte rowPins[COLS] = {PC_7, PD_6, PD_7, PF_4}; //connect to the column pinouts of the keypad
 
 //initialize an instance of class NewKeypad
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
@@ -138,10 +138,9 @@ void Capture_MainFunction()
     if (key != NO_KEY)
     {
 #if (_DEBUG_SERIAL == E_ON)
-        // Serial.print("You pressed: ");
-        // Serial.println(key);
-#endif
+        Serial.print("You pressed: ");
         Serial.println(key);
+#endif
         Master_HandlerServices_CBK(key);
         //Master_ScrollButton(key);
     }

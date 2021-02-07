@@ -37,7 +37,7 @@ typedef enum
                     *  COMMON CONFIGURATIONS  * 
  *****************************************************************/
 // Enable or Disaple Debugging through Serial.
-#define _DEBUG_SERIAL           E_OFF
+#define _DEBUG_SERIAL           E_ON
 
 // Enable or Disable GUI interface.
 #define _GUI_                   E_OFF
