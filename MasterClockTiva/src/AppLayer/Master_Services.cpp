@@ -262,8 +262,9 @@ void Master_SetSlaveModeSrv(uint8_t Key)
             * next 4 digit for minuts and.. 
             * last char 'U' for upword 'D' for downword.
         */
-            sprintf(Data, "@%d%c   ", SlaveModeInfo.Time_mins,
-                    (SlaveModeInfo.CountStyle == COUNT_DOWN) ? 'D' : 'U');
+            sprintf(Data, "@%d%c%d   ", SlaveModeInfo.Time_mins,
+                    (SlaveModeInfo.CountStyle == COUNT_DOWN) ? 'D' : 'U',
+                    SlaveModeInfo.Salve_ID);
             // Sent The Request frame to slave id unicasting.
             Network_SentUniCasting(Data, SlaveModeInfo.Salve_ID);
             // Go back to intializtion state for Service and sub service.

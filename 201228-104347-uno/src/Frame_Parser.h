@@ -18,11 +18,11 @@ typedef struct
 
 typedef struct
 {
-    //@0001U0120   >>  Command
+    //@120U1       >>  Command
     char Frame_Id;
-    char Slave_ID[4];
-    char CountStyle;
     char Mins[4];
+    char CountStyle;
+    char Slave_ID[4];
 } ExamCommandFrame_t;
 
 typedef struct
