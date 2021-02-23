@@ -1,7 +1,7 @@
 #include "Display.h"
 
 // Configuration For Lcd
-LiquidCrystal lcd(PD_2, PE_4, PD_1, PB_1, PD_0, PB_0);
+LiquidCrystal lcd(PB_4, PE_5, PE_4, PB_1, PB_0, PB_5);
 
 // Internal Variables
 uint8_t MaxCurrent_ClockId = 2;
