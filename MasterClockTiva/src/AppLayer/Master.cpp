@@ -1,5 +1,4 @@
 #include "AppLayer/Master.h"
-#include "AppLayer/Master_Cfg.h"
 
 /* 
     * this file for declarition the Global & Static Apis
@@ -15,18 +14,12 @@
  *****************************************************************/
 // Global Variable for holding the state of clocks.
 ClockState_t Clock_Status[NUM_CLOCKS];
-// Global Variable to keep the Service ID which beeing processed.
-extern Master_CurrentServiceID_t Master_CurrentServiceID;
+// Static Array for holding The Clock Status.
+static uint8_t Clock_HeartbeatPeriod[NUM_CLOCKS];
 
 /*****************************************************************
                     *  STATIC VARIABLES  * 
  *****************************************************************/
-// Static Array for holding The Clock Status.
-static uint8_t Clock_HeartbeatPeriod[NUM_CLOCKS];
-// Static Counter for Tracking Abstance of User.
-static uint8_t TimeCount_UserAbstance = 0;
-// Initilize the Service list to be false.
-bool ServiceList_Status = false;
 
 /*****************************************************************
                     *  STATIC FUNCTIONS  * 
@@ -60,21 +53,7 @@ static void Check_SlaveHeartBeat()
     }
 }
 
-static void Check_UserAbstance()
-{
-    if (TimeCount_UserAbstance == SCREEN_TIME_OUT)
-    {
-        // Un-activate any processing service.
-        Master_UnactivateService();
-        // Display Main Page.
-        Display_ChangePage(DEFAULT_PAGE);
-        ServiceList_Status = false;
-    }
-    else
-    {
-        TimeCount_UserAbstance++;
-    }
-}
+
 /*****************************************************************
                     *  GLOBAL FUNCTIONS  * 
  *****************************************************************/
@@ -101,7 +80,6 @@ void Master_MainFunctionUpdateClock()
 {
     // Call Clock To Update time.
     Clock_UpdateRealTime();
-    Display_UpdateClock();
     if (Master_Time.Second % 15 == 0)
     {
         Network_SentClockBroadCasting();
@@ -111,39 +89,16 @@ void Master_MainFunctionUpdateClock()
         Last_Second = Master_Time.Second;
         // Checking For The Max Heartbeat-Period every second
         Check_SlaveHeartBeat();
-        // Monitor The abcesnt of user
-        Check_UserAbstance();
     }
-    // Refresh Default page if no service is working and Service List Also.
-    /*
-     * Checking Master_CurrentServiceId & ServiceList_Status for both service
-     * list operation selection and default page operation selection.
-    */
-    if ((Master_CurrentServiceID == NOT_ACTIVE) &&
-        (ServiceList_Status == false))
-    {
-        Display_ClockStatusList();
-    }
+   
 }
 
 /*****************************************************************
                     *  CALL-BACKs FUNCTIONS  * 
  *****************************************************************/
-// Call back From Capture Module.
-void Master_HandlerServices_CBK(uint8_t Key)
-{
-    Master_ServiceDisptacher(Key);
-    TimeCount_UserAbstance = 0;
-}
 
 void Master_RxNotifcation_CBK(char Response_Code, uint8_t Clock_Id)
 {
-
-#ifdef _DEBUG_SERIAL // for debugging purpose
-    // Serial.println(Response_Code);
-    // Serial.println(Clock_Id, DEC);
-#endif
-
     switch (Response_Code)
     {
     case 'A': // That mean is Ack from Slave
@@ -170,4 +125,9 @@ void Master_RxNotifcation_CBK(char Response_Code, uint8_t Clock_Id)
 
 void Master_RxGuiCommand_Cbk()
 {
+}
+
+void Master_HMICommand_CBK(char* command)
+{
+    //Network_SentUniCasting(command);
 }

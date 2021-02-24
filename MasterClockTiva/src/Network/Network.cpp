@@ -30,7 +30,7 @@ void Frame_Parsing(const char *Data)
 #endif
         break;
     }
-    case '@':
+    case '@': //  Master >> Slave
     {
         Slave_id = atoi(((ExamCommandFrame_t *)Data)->Slave_ID);
         uint8_t Mins = atoi(((ExamCommandFrame_t *)Data)->Mins);
@@ -91,11 +91,12 @@ void Network_SentClockBroadCasting()
 }
 #endif
 
-void Network_SentUniCasting(char *data, uint8_t Slave_ID)
+void Network_SentUniCasting(char *data)
 {
 #ifdef _Ethernet_
 #endif
 #ifdef _RS_585_
+    Rs485_Tx(data);
 #endif
 }
 

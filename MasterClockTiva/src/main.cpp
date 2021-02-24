@@ -1,10 +1,8 @@
 #include "clock/Clock.h"
 #include "Common.h"
-#include "Display/Display.h"
 #include "Network/Network.h"
 #include "AppLayer/Master.h"
-#include "Capture/Capture.h"
-
+#include "HMI/HMI.h"
 void setup()
 {
   Serial.begin(9600);
@@ -21,7 +19,10 @@ void loop()
   {
     Master_MainFunctionUpdateClock();
   }
-  Capture_MainFunction();
+  if (Sys_Tick % 2 == 0)
+  {
+    HMI_MainFunction();
+  }
   delay(50);
   Network_RecieveMainFunction();
   Sys_Tick++;

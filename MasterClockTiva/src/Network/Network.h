@@ -10,7 +10,7 @@
 
 void Network_Setup();
 void Network_SentClockBroadCasting();
-void Network_SentUniCasting(char *data, uint8_t Slave_ID);
+void Network_SentUniCasting(char *data);
 void Network_RecieveMainFunction();
 
 #endif

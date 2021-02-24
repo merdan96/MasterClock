@@ -9,7 +9,7 @@
 #define MAX_ALLOWABLE_PERIOD              30  
 
 // The max number of Servivces that master offer.
-#define MAX_SERVICES_NUM                  3
+#define MAX_SESSION_NUM                   3
 
 // The Max Time-out to not return main Page.   
 #define SCREEN_TIME_OUT                   5
