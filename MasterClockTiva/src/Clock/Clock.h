@@ -7,8 +7,8 @@
  *****************************************************************/
 
 // Config paramter Clock Source
-/*  _RTC_  , _NTP_ , _GPS_    
-#define CLOCK_SOURC     _RTC_ 
+//   _RTC_  , _NTP_ , _GPS_    
+// #define CLOCK_SOURC     _RTC_ 
 
 /*****************************************************************
                     *  GLOABAL FUNCTIONS  * 

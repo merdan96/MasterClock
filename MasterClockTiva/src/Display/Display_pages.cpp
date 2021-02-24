@@ -7,14 +7,13 @@
 // Golbal for holding the current displied Page.
 Display_CurrentPage_t Sdisplay_CurrentPage = DEFAULT_PAGE;
 uint8_t STime_counter = 0;
-
+uint8_t Display_MaxPageItem = 2;
 /*****************************************************************
                     *  EXTERN VARIABLES  * 
  *****************************************************************/
 
 // Extern localy Lcd Obj.
 extern LiquidCrystal lcd;
-
 /*****************************************************************
                     *  STATIC FUNCTIONS  * 
  *****************************************************************/
@@ -22,16 +21,19 @@ extern LiquidCrystal lcd;
 // Display default Page
 static void Display_DefaultPage()
 {
+    Display_MaxPageItem = NUM_CLOCKS - 1;
     lcd.setCursor(0, 1);
     lcd.print("Clk Id : State      ");
-    Display_ClockStatusList(1);
+    Display_ClockStatusList();
 }
 
 static void Display_ServicesPage()
 {
+    Display_MaxPageItem = NUM_OP;
     lcd.clear();
     lcd.setCursor(0, 1);
     lcd.print("Enter Operation");
+    //Display_OpList();
     lcd.setCursor(0, 2);
     lcd.print("1-Set Exam");
     lcd.setCursor(0, 3);

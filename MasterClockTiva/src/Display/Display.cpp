@@ -5,6 +5,8 @@ LiquidCrystal lcd(PB_4, PE_5, PE_4, PB_1, PB_0, PB_5);
 
 // Internal Variables
 uint8_t MaxCurrent_ClockId = 2;
+// External Variables
+uint8_t Display_CurrentItemIndex = 1;
 
 static void print2digits(int number)
 {
@@ -42,42 +44,44 @@ void Display_Key(uint8_t Key, uint8_t Pos)
     lcd.write(Key);
 }
 
+/*
 void Display_ScrollSlaveStatus(uint8_t Key)
 {
     if (Key == '+')
     {
-        // First Line
-        lcd.setCursor(0, 2);
-        lcd.print(String("Clock ") + String(MaxCurrent_ClockId) +
-                  String(": Defult"));
-        MaxCurrent_ClockId++;
-        // Seconds Line
-        lcd.setCursor(0, 3);
-        lcd.print(String("Clock ") + String(MaxCurrent_ClockId) +
-                  String(": Defult"));
+        // // First Line
+        // lcd.setCursor(0, 2);
+        // lcd.print(String("Clock ") + String(MaxCurrent_ClockId) +
+        //           String(": Defult"));
+        // MaxCurrent_ClockId++;
+        // // Seconds Line
+        // lcd.setCursor(0, 3);
+        // lcd.print(String("Clock ") + String(MaxCurrent_ClockId) +
+        //           String(": Defult"));
     }
     else if (Key == '-')
     {
-        if (MaxCurrent_ClockId >= 3)
-        {
-            // First Line
-            lcd.setCursor(0, 3);
-            lcd.print(String("Clock ") + String(MaxCurrent_ClockId - 1) +
-                      String(": Defult"));
-            MaxCurrent_ClockId--;
-            // Seconds Line
-            lcd.setCursor(0, 2);
-            lcd.print(String("Clock ") + String(MaxCurrent_ClockId - 1) +
-                      String(": Defult"));
-        }
+        // if (MaxCurrent_ClockId >= 3)
+        // {
+        //     // First Line
+        //     lcd.setCursor(0, 3);
+        //     lcd.print(String("Clock ") + String(MaxCurrent_ClockId - 1) +
+        //               String(": Defult"));
+        //     MaxCurrent_ClockId--;
+        //     // Seconds Line
+        //     lcd.setCursor(0, 2);
+        //     lcd.print(String("Clock ") + String(MaxCurrent_ClockId - 1) +
+        //               String(": Defult"));
+        // }
     }
     else
     {
-        /* code */
+        // code
     }
 }
+*/
 
-void Display_ClockStatusList(uint8_t CurrentClockID)
+void Display_ClockStatusList(/*uint8_t CurrentClockID*/)
 {
     // Hold ClockId
     uint8_t ClockId;
@@ -85,7 +89,7 @@ void Display_ClockStatusList(uint8_t CurrentClockID)
     for (int LoopCounter = 0; LoopCounter < 2; LoopCounter++)
     {
         // ClockId  = first clock Id + the line num.
-        ClockId = CurrentClockID + LoopCounter;
+        ClockId = Display_CurrentItemIndex + LoopCounter;
         lcd.setCursor(0, (2 + LoopCounter));
         lcd.print(String("Clk ") + String(ClockId));
         switch (Clock_Status[ClockId])

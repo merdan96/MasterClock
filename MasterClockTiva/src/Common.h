@@ -43,10 +43,13 @@ typedef enum
 #define _GUI_                   E_OFF
 
 // Numbers Of Slaves Clock.
-#define NUM_CLOCKS              2
+#define NUM_CLOCKS              3
 
 // Clock-ID to be get form the IP.
 #define CLOCK_ID                MASTER_CLOCK_ID
+
+// Number of available operations
+#define NUM_OP                  2
 
 /*****************************************************************
                     *  Extern VARIABLES || Obejcts  * 

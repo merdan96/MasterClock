@@ -108,17 +108,21 @@ void Master_MainFunctionUpdateClock()
     }
     if (Master_Time.Second != Last_Second)
     {
-        Last_Second = Master_Time.Second; 
+        Last_Second = Master_Time.Second;
         // Checking For The Max Heartbeat-Period every second
         Check_SlaveHeartBeat();
         // Monitor The abcesnt of user
         Check_UserAbstance();
-        // Refresh Default page if no service is working and Service List Also.
-        if ((Master_CurrentServiceID == NOT_ACTIVE) &&
-            (ServiceList_Status == false))
-        {
-            Display_ClockStatusList(1);
-        }
+    }
+    // Refresh Default page if no service is working and Service List Also.
+    /*
+     * Checking Master_CurrentServiceId & ServiceList_Status for both service
+     * list operation selection and default page operation selection.
+    */
+    if ((Master_CurrentServiceID == NOT_ACTIVE) &&
+        (ServiceList_Status == false))
+    {
+        Display_ClockStatusList();
     }
 }
 
@@ -165,9 +169,5 @@ void Master_RxNotifcation_CBK(char Response_Code, uint8_t Clock_Id)
 }
 
 void Master_RxGuiCommand_Cbk()
-{
-}
-
-void Master_ScrollButton_CBK(uint8_t key)
 {
 }

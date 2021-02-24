@@ -82,7 +82,8 @@ static uint16_t NewKey_HandlerRotuine(uint8_t Key)
 static bool Check_SlavIdValid(uint16_t SlaveId)
 {
     bool ret_val = 0;
-    if (SlaveId < NUM_CLOCKS)
+    // Num Clock Start From Zero-index {1,N}. As Zero is Master Clock
+    if (SlaveId <= NUM_CLOCKS)
     {
         ret_val = 1;
     }

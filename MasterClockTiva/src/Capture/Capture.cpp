@@ -141,7 +141,13 @@ void Capture_MainFunction()
         Serial.print("You pressed: ");
         Serial.println(key);
 #endif
-        Master_HandlerServices_CBK(key);
-        //Master_ScrollButton(key);
+        if ((key == '+') || (key == '-'))
+        {
+            HMI_ScrollButton(key);
+        }
+        else
+        {
+            Master_HandlerServices_CBK(key);
+        }
     }
 }

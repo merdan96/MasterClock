@@ -1,6 +1,7 @@
 #ifndef CAPTURE_h
 #define CAPTURE_h
 #include "Common.h"
+#include "HMI/HMI.h"
 #include "AppLayer/Master_CBK.h"
 
 
