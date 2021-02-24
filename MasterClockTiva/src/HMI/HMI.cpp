@@ -349,9 +349,9 @@ uint32_t HamadaFeElBtngn = 0;
 void HMI_MainFunction()
 {
     Capture_MainFunction();
+    Display_UpdateClock();
     if ((HamadaFeElBtngn % 10) == 0)
     {
-        Display_UpdateClock();
         Check_UserAbsence();
         /*
      * Checking HMI_CurrentSessionID & SessionList_Status for both service
