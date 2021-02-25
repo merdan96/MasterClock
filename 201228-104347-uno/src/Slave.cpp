@@ -42,23 +42,10 @@ void Slave_RxUpdateClock_CBK(char *Clock_Str)
   }
 }
 
-void Slave_RxNewCommand(char *Command)
+void Slave_RxNewCommand(uint16_t mins,char ContStyle)
 {
-  // Serial.println(Command);
-  char mins[4] = {0};
-  for (uint8_t i = 1; i < 5; i++)
-  {
-    if ((Command[i] == 'U') ||
-        (Command[i] == 'D'))
-    {
-      Dirction = Command[i];
-      break;
-    }
-    mins[i - 1] = Command[i];
-  }
-  Mins = atoi(mins);
-  // Serial.println(Mins, DEC);
-  // Serial.println(Dirction);
+  Dirction = ContStyle;
+  Mins = mins;
   Exam_Running = 0;
   if (Dirction == 'U')
   {
@@ -70,8 +57,6 @@ void Slave_RxNewCommand(char *Command)
     Display_ExamMins(Mins);
   }
   Exam_mode = 1;
-  strcpy(Str_, "EXAM");
-  Network_SentUniCasting(Str_, 0);
 }
 
 void Slave_HandlerService_CBK(uint8_t Key)

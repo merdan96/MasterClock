@@ -39,6 +39,7 @@ void Network_SentClockBroadCasting()
 void Network_SentUniCasting(char *data, uint8_t Slave_ID)
 {
 #ifdef _Ethernet_
+
 #endif
 #ifdef _RS_585_
 #endif
@@ -68,7 +69,7 @@ void Network_RecieveMainFunction()
         Frame_Parsing(Network_PacketBuffer);
 
 #if (CLOCK_ID == 0) // Master           \
-                    // Call Notifcation \
+    // Call Notifcation                 \
     Master_RxNotifcation_CBK(packetBuffer, (remote[3] - IP_OFFEST));
 #else
         

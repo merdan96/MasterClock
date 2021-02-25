@@ -1,5 +1,6 @@
 #include "Frame_Parser.h"
 #include "Rs_485.h"
+//ToDO: include slave_Cbk
 #include "Slave.h"
 
 void Frame_Parsing(const char *Data)
@@ -29,6 +30,10 @@ void Frame_Parsing(const char *Data)
         uint8_t Slave_id = atoi(((ExamCommandFrame_t *)Data)->Slave_ID);
         uint8_t Mins = atoi(((ExamCommandFrame_t *)Data)->Mins);
         uint8_t CountStyle = ((ExamCommandFrame_t *)Data)->CountStyle;
+        if (Slave_id == CLOCK_ID)
+        {
+            Slave_RxNewCommand(Mins,CountStyle);
+        }
         // Serial.println(Slave_id, DEC);
         // Serial.println(Mins, DEC);
         // Serial.write(CountStyle);

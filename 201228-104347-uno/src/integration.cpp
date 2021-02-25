@@ -14,12 +14,14 @@ void setup()
 #endif
   Network_Setup();
   Display_init();
-  Capture_init();
+ Capture_init();  
 }
 
 void loop()
 {
   Display_mainFunction();
   Network_RecieveMainFunction();
+  Slave_MainFunction();
+  Capture_MainFunction();
 }
 
