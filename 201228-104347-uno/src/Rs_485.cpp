@@ -1,8 +1,12 @@
 #include "Rs_485.h"
 #include <HardwareSerial.h>
+#include <SoftwareSerial.h>
 #include "Common.h"
+//SoftwareSerial Hamada_TestSerial(4,5);
+//#define RS_485 Hamada_TestSerial
 // Obj Create for Software Serial
 #define RS_485 Serial
+
 
 char buff[15];
 int count = 0;
