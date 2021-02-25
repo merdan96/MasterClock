@@ -97,6 +97,7 @@ void Network_SentUniCasting(char *data)
 #endif
 #ifdef _RS_585_
     Rs485_Tx(data);
+    delay(30);
 #endif
 }
 

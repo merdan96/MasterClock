@@ -18,7 +18,7 @@ typedef struct
 
 typedef struct
 {
-    //@0001U0120   >>  Command
+    //@0120U0001   >>  Command
     char Frame_Id;
     char Slave_ID[4];
     char CountStyle;

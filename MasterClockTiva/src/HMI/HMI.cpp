@@ -257,11 +257,12 @@ void HMI_SetSlaveModeSession(uint8_t Key)
             {
             }
             // Local array for Sent pakage
-            char Data[8];
+            char Data[9];
 
-            sprintf(Data, "@%d%c%d   ", SlaveModeInfo.Time_mins,
+            sprintf(Data, "@%04d%c%04d", SlaveModeInfo.Time_mins,
                     (SlaveModeInfo.CountStyle == COUNT_DOWN) ? 'D' : 'U',
                     SlaveModeInfo.Salve_ID);
+            Serial.println(Data);
             // Sent The Request frame to slave id unicasting.
             Master_HMICommand_CBK(Data);
             // Go back to intializtion state for Service and sub service.

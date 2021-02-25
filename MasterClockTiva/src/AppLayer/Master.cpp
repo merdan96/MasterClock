@@ -129,5 +129,5 @@ void Master_RxGuiCommand_Cbk()
 
 void Master_HMICommand_CBK(char* command)
 {
-    //Network_SentUniCasting(command);
+    Network_SentUniCasting(command);
 }
