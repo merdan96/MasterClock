@@ -8,6 +8,7 @@ typedef struct
     
 } StrExamComand;
 */
+char SlaveState = 'A';
 
 uint16_t Mins, Second_Elpased = 0, Mins_UpDirction = 0;
 unsigned long Start_ExamTime, current_Milli;
@@ -20,6 +21,7 @@ void Slave_RxUpdateClock_CBK(char *Clock_Str)
 {
   if (Exam_mode != 1)
   {
+    SlaveState = 'A';
     char A_Clock[6];
     A_Clock[0] = Clock_Str[1];
     A_Clock[1] = Clock_Str[2];
@@ -38,11 +40,11 @@ void Slave_RxUpdateClock_CBK(char *Clock_Str)
   }
   else
   {
-    Network_SentUniCasting(Str_, 0);
+    SlaveState = 'E';
   }
 }
 
-void Slave_RxNewCommand(uint16_t mins,char ContStyle)
+void Slave_RxNewCommand_CBK(uint16_t mins,char ContStyle)
 {
   Dirction = ContStyle;
   Mins = mins;
@@ -57,6 +59,7 @@ void Slave_RxNewCommand(uint16_t mins,char ContStyle)
     Display_ExamMins(Mins);
   }
   Exam_mode = 1;
+  SlaveState = 'E';
 }
 
 void Slave_HandlerService_CBK(uint8_t Key)

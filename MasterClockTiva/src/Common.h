@@ -22,9 +22,7 @@ typedef enum
 {   
     OFFLINE,
     ONLINE,
-    EXAM,
-    EXAM_START,
-    EXAM_PAUSED,
+    EXAM
 } ClockState_t;
 
 typedef enum

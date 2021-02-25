@@ -3,6 +3,7 @@
 //ToDO: include slave_Cbk
 #include "Slave.h"
 
+extern char SlaveState;
 void Frame_Parsing(const char *Data)
 {
     char Frame_id = Data[0];
@@ -17,9 +18,8 @@ void Frame_Parsing(const char *Data)
         Slave_RxUpdateClock_CBK(Data);
 #if (CLOCK_ID != 0)
         char Data[8];
-        char SlaveState = 'A';
         delay(50);
-        sprintf(Data, "&000%d%c", CLOCK_ID, SlaveState);
+        sprintf(Data, "&%04d%c", CLOCK_ID, SlaveState);
         Rs485_Tx(Data);
         delay(30);
 #endif
@@ -32,7 +32,8 @@ void Frame_Parsing(const char *Data)
         uint8_t CountStyle = ((ExamCommandFrame_t *)Data)->CountStyle;
         if (Slave_id == CLOCK_ID)
         {
-            Slave_RxNewCommand(Mins,CountStyle);
+            Slave_RxNewCommand_CBK(Mins, CountStyle);
+            sprintf(Data, "&%04d%c", CLOCK_ID, SlaveState);
         }
         // Serial.println(Slave_id, DEC);
         // Serial.println(Mins, DEC);

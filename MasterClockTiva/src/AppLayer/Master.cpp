@@ -109,15 +109,6 @@ void Master_RxNotifcation_CBK(char Response_Code, uint8_t Clock_Id)
     case 'E': // That mean Exam Mode Is confirmed from Slave
         Clock_Status[Clock_Id] = EXAM;
         break;
-
-    case 'S': // That mean is Start Exam from Slave
-        Clock_Status[Clock_Id] = EXAM_START;
-        break;
-
-    case 'P': // That mean is Paused Exam from Slave
-        Clock_Status[Clock_Id] = EXAM_PAUSED;
-        break;
-
     default:
         break;
     }
