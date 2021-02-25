@@ -20,7 +20,7 @@ void Clock_Init()
     {
         Serial.println("Couldn't find RTC");
     }
-    // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+   //rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
 }
 
 // Re-sync Clock From USER to Clock Source.

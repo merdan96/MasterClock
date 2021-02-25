@@ -15,7 +15,7 @@ void Frame_Parsing(const char *Data)
     char Frame_id = Data[0];
     switch (Frame_id)
     {
-    case '#': // For Sync Watch. Master >> Slave
+    case '#': // For Sync Watch. Master >> Slave  
     {
         uint8_t Hour = atoi(((SyncCLockFrame_t *)Data)->Hour);
         uint8_t Min = atoi(((SyncCLockFrame_t *)Data)->Minuts);
@@ -70,7 +70,7 @@ void Network_Setup()
     Rs485_Init();
 #endif
 }
-
+// 
 #if (CLOCK_ID == 0) // Master
 void Network_SentClockBroadCasting()
 {
@@ -119,7 +119,7 @@ void Network_RecieveMainFunction()
     if (RetVal == E_OK)
     {
 #ifdef _DEBUG_SERIAL // for debugging purpose
-        Serial.print("Received packet of size ");
+        // Serial.print("!Received packet of size ");
         Serial.println(Network_PacketBuffer);
 #endif
         Frame_Parsing(Network_PacketBuffer);

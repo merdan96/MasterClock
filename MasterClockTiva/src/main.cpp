@@ -22,8 +22,9 @@ void loop()
   if (Sys_Tick % 2 == 0)
   {
     HMI_MainFunction();
+    Network_RecieveMainFunction();
+
   }
   delay(50);
-  Network_RecieveMainFunction();
   Sys_Tick++;
 }
