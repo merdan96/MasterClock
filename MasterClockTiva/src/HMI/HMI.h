@@ -1,8 +1,8 @@
 #ifndef HMI_H
 #define HMI_H
 #include "Common.h"
-#include "Display/Display.h"
-#include "Capture/Capture.h"
+#include "ServiceLayer/Display/Display.h"
+#include "ServiceLayer/Capture/Capture.h"
 #include "HMI/HMI_Cfg.h"
 #include "HMI_DataTypes.h"
 

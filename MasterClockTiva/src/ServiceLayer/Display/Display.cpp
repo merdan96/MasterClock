@@ -103,12 +103,12 @@ void Display_ClockStatusList(/*uint8_t CurrentClockID*/)
         case EXAM:
             lcd.print(": EXAM       ");
             break;
-        case EXAM_START:
-            lcd.print(": EXAM START ");
-            break;
-        case EXAM_PAUSED:
-            lcd.print(": EXAM PAUSED");
-            break;
+        // case EXAM_START:
+        //     lcd.print(": EXAM START ");
+        //     break;
+        // case EXAM_PAUSED:
+        //     lcd.print(": EXAM PAUSED");
+        //     break;
         default:
             break;
         }

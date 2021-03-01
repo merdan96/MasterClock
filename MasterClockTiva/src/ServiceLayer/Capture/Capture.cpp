@@ -1,4 +1,4 @@
-#include "Capture/Capture.h"
+#include "Capture.h"
 #include "HMI/HMI_CBK.h"
 #if (_IR_REMOTE_ == E_ON)
 #include <IRremote.h>

@@ -1,6 +1,6 @@
-#include "clock/Clock.h"
+#include "ServiceLayer/Clock/Clock.h"
 #include "Common.h"
-#include "Network/Network.h"
+#include "ServiceLayer/Network/Network.h"
 #include "AppLayer/Master.h"
 #include "HMI/HMI.h"
 void setup()

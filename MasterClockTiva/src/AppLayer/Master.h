@@ -3,8 +3,8 @@
 
 #include "Common.h"
 #include "HMI/HMI.h"
-#include "Network/Network.h"
-#include "Clock/Clock.h"
+#include "ServiceLayer/Network/Network.h"
+#include "ServiceLayer/Clock/Clock.h"
 
 // Decalrition of Global Functions.
 void Master_MainFunctionUpdateClock();
