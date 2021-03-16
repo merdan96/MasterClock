@@ -9,12 +9,12 @@
 void setup()
 {
 #ifdef _Debug_Serial
-  Serial.begin(9600);
+  Serial.begin(19200);
   while (!Serial);
 #endif
   Network_Setup();
   Display_init();
- Capture_init();  
+  Capture_init();
 }
 
 void loop()
