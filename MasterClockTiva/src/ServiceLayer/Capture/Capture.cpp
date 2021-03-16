@@ -23,7 +23,7 @@ char keys[ROWS][COLS] = {
     {'3', '6', '9', '#'},
     {'A', 'B', '-', '+'}};
 
-byte colPins[ROWS] = {PB_6, PA_4, PA_3, PA_2}; //connect to the row pinouts of the keypad
+byte colPins[ROWS] = {PA_2, PA_3, PA_4, PB_6}; //connect to the row pinouts of the keypad
 
 byte rowPins[COLS] = {PC_7, PD_6, PD_7, PF_4}; //connect to the column pinouts of the keypad
 

@@ -6,7 +6,7 @@
 /*****************************************************************
                     *  CONFIGURATIONS  * 
  *****************************************************************/
-#define _RS_585_
+#define _RS_485_
 
 void Network_Setup();
 void Network_SentClockBroadCasting();

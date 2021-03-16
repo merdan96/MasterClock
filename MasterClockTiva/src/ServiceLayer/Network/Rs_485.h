@@ -18,8 +18,8 @@
 #define RE_PIN 4
 #define RO_PIN 5
 #else
-#define DE_PIN PC_6
-#define RE_PIN PC_6
+#define RE_DE_PIN PC_6
+
 #endif
 
 // Global API
