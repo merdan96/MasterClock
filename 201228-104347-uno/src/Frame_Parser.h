@@ -20,7 +20,7 @@ typedef struct
 {
     //@0120U0001   >>  Command
     char Frame_Id;
-    char Mins[4];
+    char mins_arr[4];
     char CountStyle;
     char Slave_ID[4];
 } ExamCommandFrame_t;

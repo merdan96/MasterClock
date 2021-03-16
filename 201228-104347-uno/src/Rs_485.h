@@ -13,8 +13,7 @@
 #define ENABLE_TX HIGH
 #define ENABLE_RX LOW
 #if (CLOCK_ID != 0)
-#define DE_PIN 2
-#define RE_PIN 3
+#define RE_DE_PIN 2
 #else
 #define DI_PIN 8
 #define DE_PIN 9

@@ -1,7 +1,7 @@
 #include "Capture.h"
 #include "Slave.h"
 
-IRrecv irrecv(A5);
+IRrecv irrecv(3);
 decode_results results;
 
 static char Convert_IRCode2Ascci(uint32_t Code)

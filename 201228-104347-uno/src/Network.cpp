@@ -68,8 +68,9 @@ void Network_RecieveMainFunction()
 #endif
         Frame_Parsing(Network_PacketBuffer);
 
-#if (CLOCK_ID == 0) // Master           \
-    // Call Notifcation                 \
+#if (CLOCK_ID == 0) 
+    // Master
+    // Call Notifcation
     Master_RxNotifcation_CBK(packetBuffer, (remote[3] - IP_OFFEST));
 #else
         

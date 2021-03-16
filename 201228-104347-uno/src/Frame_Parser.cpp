@@ -9,18 +9,20 @@ void Frame_Parsing(const char *Data)
     char Frame_id = Data[0];
     switch (Frame_id)
     {
+#if (CLOCK_ID != 0)
     case '#': // For Sync Watch. Master >> Slave
     {
+        Slave_RxUpdateClock_CBK(Data);
+#if defined(_DEBUG_SERIAL_RS485)
         uint8_t Hour = atoi(((SyncCLockFrame_t *)Data)->Hour);
-        uint8_t Min = atoi(((SyncCLockFrame_t *)Data)->Minuts);
+        uint8_t mints = atoi(((SyncCLockFrame_t *)Data)->Minuts);
         // Serial.println(Hour, DEC);
         // Serial.println(Min, DEC);
-        Slave_RxUpdateClock_CBK(Data);
-#if (CLOCK_ID != 0)
-        char Data[8];
+#endif
+        char data_ack[8];
         delay(50);
-        sprintf(Data, "&%04d%c", CLOCK_ID, SlaveState);
-        Rs485_Tx(Data);
+        sprintf(data_ack, "&%04d%c", CLOCK_ID, SlaveState);
+        Rs485_Tx(data_ack);
         delay(30);
 #endif
         break;
@@ -28,12 +30,12 @@ void Frame_Parsing(const char *Data)
     case '@':
     {
         uint8_t Slave_id = atoi(((ExamCommandFrame_t *)Data)->Slave_ID);
-        uint8_t Mins = atoi(((ExamCommandFrame_t *)Data)->Mins);
+        uint16_t _Mins = atoi(((ExamCommandFrame_t *)Data)->mins_arr);
         uint8_t CountStyle = ((ExamCommandFrame_t *)Data)->CountStyle;
         if (Slave_id == CLOCK_ID)
         {
-            Slave_RxNewCommand_CBK(Mins, CountStyle);
-            sprintf(Data, "&%04d%c", CLOCK_ID, SlaveState);
+            Slave_RxNewCommand_CBK(_Mins, CountStyle);
+            // sprintf(Data, "&%04d%c", CLOCK_ID, SlaveState);
         }
         // Serial.println(Slave_id, DEC);
         // Serial.println(Mins, DEC);
@@ -41,6 +43,7 @@ void Frame_Parsing(const char *Data)
         // Serial.println();
         break;
     }
+#if (CLOCK_ID == 0)
     case '&': // Feedbacks       Slave  >> Master
     {
         uint8_t offest = 0;
@@ -55,6 +58,7 @@ void Frame_Parsing(const char *Data)
         }
         break;
     }
+#endif
     default:
         break;
     }
