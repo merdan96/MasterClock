@@ -14,10 +14,10 @@ uint16_t Mins, Second_Elpased = 0, Mins_UpDirction = 0;
 unsigned long Start_ExamTime, current_Milli;
 char Dirction;
 bool Exam_mode = 0;
-bool Exam_Running = 0;
+int8_t Exam_Running = 0;
 char Str_[8];
 uint32_t last_int = 0;
-void Slave_RxUpdateClock_CBK(char *Clock_Str)
+void Slave_RxUpdateClock_CBK(const char *Clock_Str)
 {
   if (Exam_mode != 1)
   {
@@ -73,9 +73,21 @@ void Slave_HandlerService_CBK(uint8_t Key)
   }
   else if (Key == '*')
   {
+#if(defined(EXAM_MODE_DOUBLE_STOP_ENABLE))
+    Exam_Running--;
+    if(Exam_Running == -1)
+    {
+      Exam_Running = 0;
+      Exam_mode = 0;
+      SlaveState = 'A';
+    }
+
+#else
+
     Exam_Running = 0;
     strcpy(Str_, "PAUSED");
     Network_SentUniCasting(Str_, 0);
+#endif    
   }
   else
   {

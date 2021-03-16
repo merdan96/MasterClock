@@ -25,8 +25,7 @@ ISR(USART_RX_vect)
 
 void Rs485_Init()
 {
-    pinMode(DE_PIN, OUTPUT);
-    pinMode(RE_PIN, OUTPUT);
+    pinMode(RE_DE_PIN, OUTPUT);
 #ifdef RS_485
     RS_485.begin(BAUD_RATE_TTL);
 #else
@@ -40,8 +39,7 @@ void Rs485_Init()
 
 void Rs485_Tx(char *Str)
 {
-    digitalWrite(DE_PIN, ENABLE_TX);
-    digitalWrite(RE_PIN, ENABLE_TX);
+    digitalWrite(RE_DE_PIN, ENABLE_TX);
     delay(30);
 #ifdef RS_485
     RS_485.print(Str);
@@ -52,8 +50,7 @@ void Rs485_Tx(char *Str)
 RetVal_t Rs485_Rx(char *Str)
 {
     RetVal_t ret_val = E_NOT_OK;
-    digitalWrite(DE_PIN, ENABLE_RX);
-    digitalWrite(RE_PIN, ENABLE_RX);
+    digitalWrite(RE_DE_PIN, ENABLE_RX);
 #ifdef RS_485
     if (RS_485.available() > 0)
     {

@@ -8,5 +8,8 @@
 // Clock ID 0 >> Master
 #define CLOCK_ID    1
 
+// enables exam mode to be cancelled on 2 '*' IR remote presses
+#define EXAM_MODE_DOUBLE_STOP_ENABLE
+
 #endif
     
