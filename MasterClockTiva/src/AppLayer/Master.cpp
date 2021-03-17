@@ -80,15 +80,16 @@ void Master_MainFunctionUpdateClock()
 {
     // Call Clock To Update time.
     Clock_UpdateRealTime();
-    if (Master_Time.Second % 15 == 0)
-    {
-        Network_SentClockBroadCasting();
-    }
     if (Master_Time.Second != Last_Second)
     {
+        if (Master_Time.Second % 15 == 0)
+        {
+            Network_SentClockBroadCasting();
+        }
         Last_Second = Master_Time.Second;
         // Checking For The Max Heartbeat-Period every second
         Check_SlaveHeartBeat();
+
     }
    
 }

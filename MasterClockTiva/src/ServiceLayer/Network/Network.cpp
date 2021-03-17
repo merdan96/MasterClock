@@ -19,8 +19,8 @@ void Frame_Parsing(const char *Data)
     {
         uint8_t Hour = atoi(((SyncCLockFrame_t *)Data)->Hour);
         uint8_t Min = atoi(((SyncCLockFrame_t *)Data)->Minuts);
-        Serial.println(Hour, DEC);
-        Serial.println(Min, DEC);
+        // Serial.println(Hour, DEC);
+        // Serial.println(Min, DEC);
 #if (CLOCK_ID != 0)
         char Data[8];
         char SlaveState = 'A';
@@ -35,10 +35,10 @@ void Frame_Parsing(const char *Data)
         Slave_id = atoi(((ExamCommandFrame_t *)Data)->Slave_ID);
         uint8_t Mins = atoi(((ExamCommandFrame_t *)Data)->Mins);
         uint8_t CountStyle = ((ExamCommandFrame_t *)Data)->CountStyle;
-        Serial.println(Slave_id, DEC);
-        Serial.println(Mins, DEC);
-        Serial.write(CountStyle);
-        Serial.println();
+        // Serial.println(Slave_id, DEC);
+        // Serial.println(Mins, DEC);
+        // Serial.write(CountStyle);
+        // Serial.println();
         break;
     }
     case '&': // Feedbacks       Slave  >> Master
@@ -48,9 +48,9 @@ void Frame_Parsing(const char *Data)
         {
             Slave_id = atoi(((FeedBackFrame_t *)(Data + offest))->Slave_ID);
             FeedBack = ((FeedBackFrame_t *)(Data + offest))->FeedBack;
-            Serial.println(Slave_id, DEC);
-            Serial.write(FeedBack);
-            Serial.println();
+            // Serial.println(Slave_id, DEC);
+            // Serial.write(FeedBack);
+            // Serial.println();
             Master_RxNotifcation_CBK(FeedBack, Slave_id);
             offest += 6;
         }
@@ -66,15 +66,15 @@ void Network_Setup()
 #ifdef _Ethernet_
 
 #endif
-#ifdef _RS_585_
+#ifdef _RS_485_
     Rs485_Init();
 #endif
 }
-// 
+
 #if (CLOCK_ID == 0) // Master
 void Network_SentClockBroadCasting()
 {
-    char data_TX[6];
+    char data_TX[7];
     data_TX[0] = '#';
     data_TX[1] = '0' + Master_Time.Hour / 10;
     data_TX[2] = '0' + Master_Time.Hour % 10;
@@ -82,11 +82,11 @@ void Network_SentClockBroadCasting()
     data_TX[4] = '0' + Master_Time.Minute / 10;
     data_TX[5] = '0' + Master_Time.Minute % 10;
     data_TX[6] = 0;
-
 #ifdef _Ethernet_
 #endif
-#ifdef _RS_585_
+#ifdef _RS_485_
     Rs485_Tx(data_TX);
+
 #endif
 }
 #endif
@@ -95,7 +95,7 @@ void Network_SentUniCasting(char *data)
 {
 #ifdef _Ethernet_
 #endif
-#ifdef _RS_585_
+#ifdef _RS_485_
     Rs485_Tx(data);
     delay(30);
 #endif
@@ -112,7 +112,7 @@ void Network_RecieveMainFunction()
 #ifdef _Ethernet_
 
 #endif
-#ifdef _RS_585_
+#ifdef _RS_485_
     RetVal = Rs485_Rx(Network_PacketBuffer);
 
 #endif
